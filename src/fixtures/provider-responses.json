@@ -1,0 +1,1209 @@
+{
+  "schemaVersion": 1,
+  "fixtureVersion": "2026.08.24",
+  "description": "Deterministic synthetic provider responses for onboarding validation, eligibility, banking, AML, background, appointment, partner-routing, and electronic-signature demonstrations. All identifiers and people are fictitious.",
+  "defaults": {
+    "latencyMs": 350,
+    "currency": "USD",
+    "country": "US",
+    "correlationIdPrefix": "corr-demo",
+    "generatedAt": "2026-08-24T12:00:00.000Z"
+  },
+  "providers": [
+    {
+      "code": "NIPR",
+      "name": "National Insurance Producer Registry",
+      "service": "licenseVerification",
+      "defaultScenario": "license_active_eligible",
+      "scenarios": [
+        {
+          "id": "nipr_license_active_eligible",
+          "scenario": "license_active_eligible",
+          "description": "The producer has an active resident license and the required lines of authority.",
+          "outcome": "VERIFIED",
+          "httpStatus": 200,
+          "latencyMs": 300,
+          "requestMatch": {
+            "npn": "8101003",
+            "residentState": "PA"
+          },
+          "response": {
+            "transactionId": "NIPR-DEMO-1001",
+            "npn": "8101003",
+            "identityMatch": true,
+            "producerStatus": "ACTIVE",
+            "residentState": "PA",
+            "licenseNumber": "PA-DEMO-8101003",
+            "licenseStatus": "ACTIVE",
+            "licenseEffectiveDate": "2024-01-15",
+            "licenseExpirationDate": "2027-01-31",
+            "linesOfAuthority": [
+              {
+                "code": "LIFE",
+                "status": "ACTIVE",
+                "effectiveDate": "2024-01-15"
+              },
+              {
+                "code": "ACCIDENT_HEALTH",
+                "status": "ACTIVE",
+                "effectiveDate": "2024-01-15"
+              }
+            ],
+            "appointments": [],
+            "eligible": true,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "nipr_license_missing_line",
+          "scenario": "license_missing_line",
+          "description": "The producer is active but does not hold the requested life line of authority.",
+          "outcome": "INELIGIBLE",
+          "httpStatus": 200,
+          "latencyMs": 320,
+          "requestMatch": {
+            "npn": "8101102",
+            "residentState": "TX"
+          },
+          "response": {
+            "transactionId": "NIPR-DEMO-1002",
+            "npn": "8101102",
+            "identityMatch": true,
+            "producerStatus": "ACTIVE",
+            "residentState": "TX",
+            "licenseNumber": "TX-DEMO-8101102",
+            "licenseStatus": "ACTIVE",
+            "licenseEffectiveDate": "2025-02-01",
+            "licenseExpirationDate": "2027-02-28",
+            "linesOfAuthority": [
+              {
+                "code": "PROPERTY",
+                "status": "ACTIVE",
+                "effectiveDate": "2025-02-01"
+              }
+            ],
+            "appointments": [],
+            "eligible": false,
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "REQUIRED_LINE_OF_AUTHORITY_MISSING"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "nipr_license_expired",
+          "scenario": "license_expired",
+          "description": "The producer license exists but is expired.",
+          "outcome": "INELIGIBLE",
+          "httpStatus": 200,
+          "latencyMs": 280,
+          "requestMatch": {
+            "npn": "8101103",
+            "residentState": "FL"
+          },
+          "response": {
+            "transactionId": "NIPR-DEMO-1003",
+            "npn": "8101103",
+            "identityMatch": true,
+            "producerStatus": "INACTIVE",
+            "residentState": "FL",
+            "licenseNumber": "FL-DEMO-8101103",
+            "licenseStatus": "EXPIRED",
+            "licenseEffectiveDate": "2022-03-01",
+            "licenseExpirationDate": "2026-02-28",
+            "linesOfAuthority": [
+              {
+                "code": "LIFE",
+                "status": "EXPIRED",
+                "effectiveDate": "2022-03-01"
+              }
+            ],
+            "appointments": [],
+            "eligible": false,
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "LICENSE_EXPIRED"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "nipr_identity_mismatch",
+          "scenario": "identity_mismatch",
+          "description": "The NPN exists, but the supplied identity does not match the registry record.",
+          "outcome": "MANUAL_REVIEW",
+          "httpStatus": 200,
+          "latencyMs": 340,
+          "requestMatch": {
+            "npn": "8101104"
+          },
+          "response": {
+            "transactionId": "NIPR-DEMO-1004",
+            "npn": "8101104",
+            "identityMatch": false,
+            "producerStatus": "ACTIVE",
+            "residentState": "OH",
+            "licenseNumber": "OH-DEMO-8101104",
+            "licenseStatus": "ACTIVE",
+            "licenseEffectiveDate": "2023-06-01",
+            "licenseExpirationDate": "2027-05-31",
+            "linesOfAuthority": [
+              {
+                "code": "LIFE",
+                "status": "ACTIVE",
+                "effectiveDate": "2023-06-01"
+              }
+            ],
+            "appointments": [],
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "NIPR_IDENTITY_MISMATCH"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "nipr_producer_not_found",
+          "scenario": "producer_not_found",
+          "description": "No producer record is found for the supplied NPN.",
+          "outcome": "NOT_FOUND",
+          "httpStatus": 404,
+          "latencyMs": 250,
+          "requestMatch": {
+            "npn": "9999999"
+          },
+          "response": {
+            "transactionId": "NIPR-DEMO-1005",
+            "npn": "9999999",
+            "identityMatch": false,
+            "producerStatus": "NOT_FOUND",
+            "residentState": null,
+            "licenseNumber": null,
+            "licenseStatus": "NOT_FOUND",
+            "licenseEffectiveDate": null,
+            "licenseExpirationDate": null,
+            "linesOfAuthority": [],
+            "appointments": [],
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "NIPR_PRODUCER_NOT_FOUND"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "GIACT",
+      "name": "GIACT Demo Account Verification",
+      "service": "bankAccountVerification",
+      "defaultScenario": "account_verified",
+      "scenarios": [
+        {
+          "id": "giact_account_verified",
+          "scenario": "account_verified",
+          "description": "The routing and account details are valid and ownership is confirmed.",
+          "outcome": "VERIFIED",
+          "httpStatus": 200,
+          "latencyMs": 450,
+          "requestMatch": {
+            "routingNumberMasked": "*****1100",
+            "accountNumberMasked": "*****6789"
+          },
+          "response": {
+            "transactionId": "GIACT-DEMO-2001",
+            "accountStatus": "OPEN",
+            "routingNumberStatus": "VALID",
+            "accountNumberStatus": "VALID",
+            "ownershipStatus": "MATCH",
+            "accountType": "checking",
+            "paymentRisk": "LOW",
+            "verified": true,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "giact_ownership_mismatch",
+          "scenario": "ownership_mismatch",
+          "description": "The account is open, but the applicant name does not match the account owner.",
+          "outcome": "MANUAL_REVIEW",
+          "httpStatus": 200,
+          "latencyMs": 470,
+          "requestMatch": {
+            "routingNumberMasked": "*****2200",
+            "accountNumberMasked": "*****2202"
+          },
+          "response": {
+            "transactionId": "GIACT-DEMO-2002",
+            "accountStatus": "OPEN",
+            "routingNumberStatus": "VALID",
+            "accountNumberStatus": "VALID",
+            "ownershipStatus": "NO_MATCH",
+            "accountType": "checking",
+            "paymentRisk": "MEDIUM",
+            "verified": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "BANK_ACCOUNT_OWNERSHIP_MISMATCH"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "giact_invalid_routing_number",
+          "scenario": "invalid_routing_number",
+          "description": "The supplied routing number fails validation.",
+          "outcome": "REJECTED",
+          "httpStatus": 422,
+          "latencyMs": 260,
+          "requestMatch": {
+            "routingNumberMasked": "*****0000"
+          },
+          "response": {
+            "transactionId": "GIACT-DEMO-2003",
+            "accountStatus": "UNKNOWN",
+            "routingNumberStatus": "INVALID",
+            "accountNumberStatus": "NOT_CHECKED",
+            "ownershipStatus": "NOT_CHECKED",
+            "accountType": null,
+            "paymentRisk": "HIGH",
+            "verified": false,
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "BANK_ROUTING_NUMBER_INVALID"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "giact_account_closed",
+          "scenario": "account_closed",
+          "description": "The supplied bank account is closed.",
+          "outcome": "REJECTED",
+          "httpStatus": 200,
+          "latencyMs": 410,
+          "requestMatch": {
+            "routingNumberMasked": "*****3300",
+            "accountNumberMasked": "*****3303"
+          },
+          "response": {
+            "transactionId": "GIACT-DEMO-2004",
+            "accountStatus": "CLOSED",
+            "routingNumberStatus": "VALID",
+            "accountNumberStatus": "VALID",
+            "ownershipStatus": "MATCH",
+            "accountType": "savings",
+            "paymentRisk": "HIGH",
+            "verified": false,
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "BANK_ACCOUNT_CLOSED"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "AML_DEMO",
+      "name": "Demo Anti-Money Laundering Provider",
+      "service": "amlScreening",
+      "defaultScenario": "aml_clear",
+      "scenarios": [
+        {
+          "id": "aml_clear",
+          "scenario": "aml_clear",
+          "description": "No sanctions, watchlist, or adverse media matches are found.",
+          "outcome": "CLEAR",
+          "httpStatus": 200,
+          "latencyMs": 500,
+          "requestMatch": {
+            "screeningKey": "AML-DEMO-CLEAR"
+          },
+          "response": {
+            "screeningId": "AML-DEMO-3001",
+            "status": "COMPLETE",
+            "riskLevel": "LOW",
+            "sanctionsMatch": false,
+            "watchlistMatch": false,
+            "politicallyExposedPersonMatch": false,
+            "adverseMediaMatch": false,
+            "matchScore": 0,
+            "disposition": "CLEAR",
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "aml_possible_match",
+          "scenario": "aml_possible_match",
+          "description": "A low-confidence watchlist match requires manual adjudication.",
+          "outcome": "MANUAL_REVIEW",
+          "httpStatus": 200,
+          "latencyMs": 520,
+          "requestMatch": {
+            "screeningKey": "AML-DEMO-REVIEW"
+          },
+          "response": {
+            "screeningId": "AML-DEMO-3002",
+            "status": "COMPLETE",
+            "riskLevel": "MEDIUM",
+            "sanctionsMatch": false,
+            "watchlistMatch": true,
+            "politicallyExposedPersonMatch": false,
+            "adverseMediaMatch": false,
+            "matchScore": 0.67,
+            "disposition": "REVIEW",
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "AML_POSSIBLE_MATCH"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "aml_confirmed_sanctions_match",
+          "scenario": "aml_confirmed_sanctions_match",
+          "description": "A synthetic confirmed sanctions match blocks onboarding.",
+          "outcome": "BLOCKED",
+          "httpStatus": 200,
+          "latencyMs": 550,
+          "requestMatch": {
+            "screeningKey": "AML-DEMO-BLOCK"
+          },
+          "response": {
+            "screeningId": "AML-DEMO-3003",
+            "status": "COMPLETE",
+            "riskLevel": "HIGH",
+            "sanctionsMatch": true,
+            "watchlistMatch": true,
+            "politicallyExposedPersonMatch": false,
+            "adverseMediaMatch": true,
+            "matchScore": 0.98,
+            "disposition": "BLOCK",
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "AML_CONFIRMED_SANCTIONS_MATCH"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "aml_insufficient_identity",
+          "scenario": "aml_insufficient_identity",
+          "description": "The screening cannot run because required identity attributes are missing.",
+          "outcome": "INCOMPLETE",
+          "httpStatus": 422,
+          "latencyMs": 180,
+          "requestMatch": {
+            "screeningKey": "AML-DEMO-INCOMPLETE"
+          },
+          "response": {
+            "screeningId": "AML-DEMO-3004",
+            "status": "NOT_RUN",
+            "riskLevel": "UNKNOWN",
+            "sanctionsMatch": null,
+            "watchlistMatch": null,
+            "politicallyExposedPersonMatch": null,
+            "adverseMediaMatch": null,
+            "matchScore": null,
+            "disposition": "INCOMPLETE",
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "AML_IDENTITY_DATA_REQUIRED"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "BIG",
+      "name": "BIG Demo Background Screening",
+      "service": "backgroundCheck",
+      "defaultScenario": "background_clear",
+      "scenarios": [
+        {
+          "id": "big_background_clear",
+          "scenario": "background_clear",
+          "description": "The background screening completes with a clear disposition.",
+          "outcome": "CLEAR",
+          "httpStatus": 200,
+          "latencyMs": 700,
+          "requestMatch": {
+            "backgroundKey": "BIG-DEMO-CLEAR"
+          },
+          "response": {
+            "checkId": "BIG-DEMO-4001",
+            "status": "COMPLETE",
+            "disposition": "CLEAR",
+            "criminalRecordsFound": false,
+            "regulatoryActionsFound": false,
+            "creditReviewRequired": false,
+            "manualReviewRequired": false,
+            "completedAt": "2026-08-24T12:00:00.000Z",
+            "expiresAt": "2027-02-20T12:00:00.000Z",
+            "validationCodes": []
+          }
+        },
+        {
+          "id": "big_background_pending",
+          "scenario": "background_pending",
+          "description": "The background request is accepted and remains in progress.",
+          "outcome": "PENDING",
+          "httpStatus": 202,
+          "latencyMs": 420,
+          "requestMatch": {
+            "backgroundKey": "BIG-DEMO-PENDING"
+          },
+          "response": {
+            "checkId": "BIG-DEMO-4002",
+            "status": "PENDING",
+            "disposition": "UNAVAILABLE",
+            "criminalRecordsFound": null,
+            "regulatoryActionsFound": null,
+            "creditReviewRequired": null,
+            "manualReviewRequired": false,
+            "initiatedAt": "2026-08-24T12:00:00.000Z",
+            "estimatedCompletionAt": "2026-08-25T12:00:00.000Z",
+            "validationCodes": [
+              "BACKGROUND_CHECK_PENDING"
+            ]
+          }
+        },
+        {
+          "id": "big_background_review",
+          "scenario": "background_review",
+          "description": "A disclosed or discovered item requires manual background review.",
+          "outcome": "MANUAL_REVIEW",
+          "httpStatus": 200,
+          "latencyMs": 750,
+          "requestMatch": {
+            "backgroundKey": "BIG-DEMO-REVIEW"
+          },
+          "response": {
+            "checkId": "BIG-DEMO-4003",
+            "status": "COMPLETE",
+            "disposition": "REVIEW",
+            "criminalRecordsFound": false,
+            "regulatoryActionsFound": true,
+            "creditReviewRequired": false,
+            "manualReviewRequired": true,
+            "completedAt": "2026-08-24T12:00:00.000Z",
+            "expiresAt": null,
+            "validationCodes": [
+              "BACKGROUND_ADJUDICATION_REQUIRED"
+            ]
+          }
+        },
+        {
+          "id": "big_background_reused",
+          "scenario": "background_reused",
+          "description": "A recent clear background check is reused within the configured 180-day window.",
+          "outcome": "REUSED",
+          "httpStatus": 200,
+          "latencyMs": 120,
+          "requestMatch": {
+            "backgroundKey": "BIG-DEMO-REUSE"
+          },
+          "response": {
+            "checkId": "BIG-DEMO-4004",
+            "linkedCheckId": "BIG-DEMO-HISTORICAL-4004",
+            "status": "COMPLETE",
+            "disposition": "CLEAR",
+            "criminalRecordsFound": false,
+            "regulatoryActionsFound": false,
+            "creditReviewRequired": false,
+            "reused": true,
+            "reuseReason": "RECENT_CLEAR_REUSED",
+            "originalCompletedAt": "2026-06-15T14:30:00.000Z",
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "BACKGROUND_REUSE_AVAILABLE"
+            ]
+          }
+        },
+        {
+          "id": "big_registered_rep_exempt",
+          "scenario": "registered_rep_exempt",
+          "description": "A registered representative is exempt from the standard background flow.",
+          "outcome": "NOT_REQUIRED",
+          "httpStatus": 200,
+          "latencyMs": 50,
+          "requestMatch": {
+            "contractType": "registered_representative"
+          },
+          "response": {
+            "checkId": null,
+            "status": "NOT_REQUIRED",
+            "disposition": "EXEMPT",
+            "reused": false,
+            "reason": "REGISTERED_REP_EXEMPT",
+            "manualReviewRequired": false,
+            "validationCodes": []
+          }
+        }
+      ]
+    },
+    {
+      "code": "SIRCON_VERTAFORE",
+      "name": "Sircon and Vertafore Appointment Services",
+      "service": "appointmentVerification",
+      "defaultScenario": "appointment_accepted",
+      "scenarios": [
+        {
+          "id": "sircon_appointment_accepted",
+          "scenario": "appointment_accepted",
+          "description": "The appointment request is accepted for all requested states.",
+          "outcome": "ACCEPTED",
+          "httpStatus": 200,
+          "latencyMs": 600,
+          "requestMatch": {
+            "appointmentKey": "SIRCON-DEMO-ACCEPT"
+          },
+          "response": {
+            "transactionId": "SIRCON-DEMO-5001",
+            "status": "ACCEPTED",
+            "appointmentModel": "JUST_IN_TIME",
+            "carrierCode": "BANNER",
+            "states": [
+              {
+                "state": "OH",
+                "status": "ACCEPTED",
+                "effectiveDate": "2026-08-24"
+              },
+              {
+                "state": "IN",
+                "status": "ACCEPTED",
+                "effectiveDate": "2026-08-24"
+              }
+            ],
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "completedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "sircon_appointment_pending",
+          "scenario": "appointment_pending",
+          "description": "The appointment request has been submitted and is awaiting state confirmation.",
+          "outcome": "PENDING",
+          "httpStatus": 202,
+          "latencyMs": 430,
+          "requestMatch": {
+            "appointmentKey": "SIRCON-DEMO-PENDING"
+          },
+          "response": {
+            "transactionId": "SIRCON-DEMO-5002",
+            "status": "PENDING",
+            "appointmentModel": "JUST_IN_TIME",
+            "carrierCode": "BANNER",
+            "states": [
+              {
+                "state": "NJ",
+                "status": "PENDING",
+                "effectiveDate": null
+              },
+              {
+                "state": "NY",
+                "status": "PENDING",
+                "effectiveDate": null
+              }
+            ],
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "APPOINTMENT_PENDING"
+            ],
+            "submittedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "sircon_appointment_rejected",
+          "scenario": "appointment_rejected",
+          "description": "The appointment request is rejected because the producer lacks state eligibility.",
+          "outcome": "REJECTED",
+          "httpStatus": 200,
+          "latencyMs": 620,
+          "requestMatch": {
+            "appointmentKey": "SIRCON-DEMO-REJECT"
+          },
+          "response": {
+            "transactionId": "SIRCON-DEMO-5003",
+            "status": "REJECTED",
+            "appointmentModel": "PRE_APPOINTMENT",
+            "carrierCode": "WILLIAM_PENN",
+            "states": [
+              {
+                "state": "NY",
+                "status": "REJECTED",
+                "effectiveDate": null,
+                "reason": "PRODUCER_NOT_ELIGIBLE"
+              }
+            ],
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "APPOINTMENT_STATE_ELIGIBILITY_FAILED"
+            ],
+            "completedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "sircon_appointment_reused",
+          "scenario": "appointment_reused",
+          "description": "An existing active carrier appointment is reused.",
+          "outcome": "REUSED",
+          "httpStatus": 200,
+          "latencyMs": 140,
+          "requestMatch": {
+            "appointmentKey": "SIRCON-DEMO-REUSE"
+          },
+          "response": {
+            "transactionId": "SIRCON-DEMO-5004",
+            "linkedAppointmentId": "APT-DEMO-HISTORICAL-5004",
+            "status": "ACTIVE",
+            "appointmentModel": "JUST_IN_TIME",
+            "carrierCode": "BANNER",
+            "states": [
+              {
+                "state": "PA",
+                "status": "ACTIVE",
+                "effectiveDate": "2025-11-12"
+              }
+            ],
+            "reused": true,
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "APPOINTMENT_REUSE_AVAILABLE"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "DTCC",
+      "name": "Depository Trust and Clearing Corporation",
+      "service": "registrationVerification",
+      "defaultScenario": "registered_rep_verified",
+      "scenarios": [
+        {
+          "id": "dtcc_registered_rep_verified",
+          "scenario": "registered_rep_verified",
+          "description": "The representative registration is active and matches the supplied CRD and NPN.",
+          "outcome": "VERIFIED",
+          "httpStatus": 200,
+          "latencyMs": 380,
+          "requestMatch": {
+            "crd": "700001",
+            "npn": "3003001"
+          },
+          "response": {
+            "transactionId": "DTCC-DEMO-6001",
+            "crd": "700001",
+            "npn": "3003001",
+            "identityMatch": true,
+            "registrationStatus": "ACTIVE",
+            "brokerDealerStatus": "ACTIVE",
+            "registrations": [
+              {
+                "jurisdiction": "NJ",
+                "status": "ACTIVE",
+                "effectiveDate": "2024-05-01"
+              },
+              {
+                "jurisdiction": "NY",
+                "status": "ACTIVE",
+                "effectiveDate": "2024-05-01"
+              }
+            ],
+            "backgroundRequired": false,
+            "backgroundReason": "REGISTERED_REP_EXEMPT",
+            "eligible": true,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "dtcc_registration_inactive",
+          "scenario": "registration_inactive",
+          "description": "The representative registration exists but is inactive.",
+          "outcome": "INELIGIBLE",
+          "httpStatus": 200,
+          "latencyMs": 390,
+          "requestMatch": {
+            "crd": "700002",
+            "npn": "3003002"
+          },
+          "response": {
+            "transactionId": "DTCC-DEMO-6002",
+            "crd": "700002",
+            "npn": "3003002",
+            "identityMatch": true,
+            "registrationStatus": "INACTIVE",
+            "brokerDealerStatus": "ACTIVE",
+            "registrations": [
+              {
+                "jurisdiction": "IL",
+                "status": "INACTIVE",
+                "effectiveDate": "2023-01-01",
+                "terminationDate": "2026-07-31"
+              }
+            ],
+            "backgroundRequired": true,
+            "backgroundReason": "REGISTRATION_NOT_ACTIVE",
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "DTCC_REGISTRATION_INACTIVE"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "dtcc_crd_not_found",
+          "scenario": "crd_not_found",
+          "description": "No registered representative is found for the supplied CRD.",
+          "outcome": "NOT_FOUND",
+          "httpStatus": 404,
+          "latencyMs": 270,
+          "requestMatch": {
+            "crd": "799999"
+          },
+          "response": {
+            "transactionId": "DTCC-DEMO-6003",
+            "crd": "799999",
+            "npn": null,
+            "identityMatch": false,
+            "registrationStatus": "NOT_FOUND",
+            "brokerDealerStatus": "UNKNOWN",
+            "registrations": [],
+            "backgroundRequired": true,
+            "backgroundReason": "REGISTRATION_NOT_VERIFIED",
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "DTCC_CRD_NOT_FOUND"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "dtcc_identity_mismatch",
+          "scenario": "identity_mismatch",
+          "description": "The CRD is active, but the supplied NPN does not match the representative.",
+          "outcome": "MANUAL_REVIEW",
+          "httpStatus": 200,
+          "latencyMs": 410,
+          "requestMatch": {
+            "crd": "700004",
+            "npn": "3003999"
+          },
+          "response": {
+            "transactionId": "DTCC-DEMO-6004",
+            "crd": "700004",
+            "npn": "3003999",
+            "identityMatch": false,
+            "registrationStatus": "ACTIVE",
+            "brokerDealerStatus": "ACTIVE",
+            "registrations": [
+              {
+                "jurisdiction": "CO",
+                "status": "ACTIVE",
+                "effectiveDate": "2025-01-15"
+              }
+            ],
+            "backgroundRequired": true,
+            "backgroundReason": "IDENTITY_MISMATCH",
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "DTCC_IDENTITY_MISMATCH"
+            ],
+            "checkedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "ETHOS",
+      "name": "Ethos Partner Integration",
+      "service": "partnerSubmission",
+      "defaultScenario": "submission_accepted",
+      "scenarios": [
+        {
+          "id": "ethos_submission_accepted",
+          "scenario": "submission_accepted",
+          "description": "A valid Ethos submission is accepted and mapped to a Banner onboarding application.",
+          "outcome": "ACCEPTED",
+          "httpStatus": 201,
+          "latencyMs": 330,
+          "requestMatch": {
+            "submissionId": "ETH-DEMO-2001"
+          },
+          "response": {
+            "transactionId": "ETHOS-DEMO-7001",
+            "submissionId": "ETH-DEMO-2001",
+            "partnerCode": "ETHOS",
+            "carrierCode": "BANNER",
+            "status": "ACCEPTED",
+            "normalized": true,
+            "trackingId": "TRK-ETHOS-DEMO-2001",
+            "journeyType": "agent_contracting",
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "receivedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "ethos_carrier_rule_rejected",
+          "scenario": "carrier_rule_rejected",
+          "description": "The submission is normalized but routed to an exception because William Penn does not support the agency type.",
+          "outcome": "MANUAL_EXCEPTION",
+          "httpStatus": 422,
+          "latencyMs": 350,
+          "requestMatch": {
+            "submissionId": "ETH-DEMO-2002"
+          },
+          "response": {
+            "transactionId": "ETHOS-DEMO-7002",
+            "submissionId": "ETH-DEMO-2002",
+            "partnerCode": "ETHOS",
+            "carrierCode": "WILLIAM_PENN",
+            "status": "EXCEPTION_ROUTED",
+            "normalized": true,
+            "trackingId": "TRK-ETHOS-DEMO-2002",
+            "journeyType": "agent_contracting",
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED"
+            ],
+            "receivedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "ethos_parse_error",
+          "scenario": "parse_error",
+          "description": "The Ethos XML document is malformed and cannot be normalized.",
+          "outcome": "REJECTED",
+          "httpStatus": 400,
+          "latencyMs": 120,
+          "requestMatch": {
+            "submissionId": "ETH-DEMO-2003"
+          },
+          "response": {
+            "transactionId": "ETHOS-DEMO-7003",
+            "submissionId": "ETH-DEMO-2003",
+            "partnerCode": "ETHOS",
+            "carrierCode": null,
+            "status": "REJECTED",
+            "normalized": false,
+            "trackingId": null,
+            "journeyType": null,
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "IMPORT_PARSE_ERROR"
+            ],
+            "receivedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "ethos_duplicate_submission",
+          "scenario": "duplicate_submission",
+          "description": "The partner submission identifier has already been processed.",
+          "outcome": "CONFLICT",
+          "httpStatus": 409,
+          "latencyMs": 180,
+          "requestMatch": {
+            "submissionId": "ETH-DEMO-DUPLICATE-7004"
+          },
+          "response": {
+            "transactionId": "ETHOS-DEMO-7004",
+            "submissionId": "ETH-DEMO-DUPLICATE-7004",
+            "partnerCode": "ETHOS",
+            "carrierCode": "BANNER",
+            "status": "DUPLICATE",
+            "normalized": false,
+            "trackingId": "TRK-ETHOS-EXISTING-7004",
+            "journeyType": "agent_contracting",
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "DUPLICATE_PARTNER_SUBMISSION"
+            ],
+            "receivedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "HORIZON",
+      "name": "Horizon Just-in-Time Routing",
+      "service": "appointmentRouting",
+      "defaultScenario": "jit_route_created",
+      "scenarios": [
+        {
+          "id": "horizon_jit_route_created",
+          "scenario": "jit_route_created",
+          "description": "A just-in-time appointment route is created for an eligible producer.",
+          "outcome": "ROUTED",
+          "httpStatus": 201,
+          "latencyMs": 360,
+          "requestMatch": {
+            "routingKey": "HORIZON-DEMO-JIT"
+          },
+          "response": {
+            "routingId": "HORIZON-DEMO-8001",
+            "status": "ROUTED",
+            "routingModel": "JUST_IN_TIME",
+            "carrierCode": "BANNER",
+            "gaCode": "NATIONAL_DEMO",
+            "targetQueue": "JIT_APPOINTMENT",
+            "priority": "normal",
+            "eligible": true,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "routedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "horizon_preappointment_route_created",
+          "scenario": "preappointment_route_created",
+          "description": "A pre-appointment route is created for a carrier and state combination requiring prior approval.",
+          "outcome": "ROUTED",
+          "httpStatus": 201,
+          "latencyMs": 370,
+          "requestMatch": {
+            "routingKey": "HORIZON-DEMO-PRE"
+          },
+          "response": {
+            "routingId": "HORIZON-DEMO-8002",
+            "status": "ROUTED",
+            "routingModel": "PRE_APPOINTMENT",
+            "carrierCode": "WILLIAM_PENN",
+            "gaCode": "REGIONAL_DEMO",
+            "targetQueue": "PRE_APPOINTMENT_REVIEW",
+            "priority": "high",
+            "eligible": true,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "routedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "horizon_hierarchy_unresolved",
+          "scenario": "hierarchy_unresolved",
+          "description": "No valid distribution hierarchy can be resolved for the application.",
+          "outcome": "MANUAL_REVIEW",
+          "httpStatus": 422,
+          "latencyMs": 290,
+          "requestMatch": {
+            "routingKey": "HORIZON-DEMO-HIERARCHY"
+          },
+          "response": {
+            "routingId": "HORIZON-DEMO-8003",
+            "status": "EXCEPTION_ROUTED",
+            "routingModel": "UNRESOLVED",
+            "carrierCode": "BANNER",
+            "gaCode": "UNKNOWN_DEMO",
+            "targetQueue": "HIERARCHY_EXCEPTION",
+            "priority": "high",
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "HIERARCHY_NOT_RESOLVED"
+            ],
+            "routedAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "horizon_terminated_producer_blocked",
+          "scenario": "terminated_producer_blocked",
+          "description": "Routing is blocked because termination history makes the producer ineligible.",
+          "outcome": "BLOCKED",
+          "httpStatus": 422,
+          "latencyMs": 310,
+          "requestMatch": {
+            "routingKey": "HORIZON-DEMO-TERMINATED"
+          },
+          "response": {
+            "routingId": "HORIZON-DEMO-8004",
+            "status": "BLOCKED",
+            "routingModel": "NONE",
+            "carrierCode": "BANNER",
+            "gaCode": "REGIONAL_DEMO",
+            "targetQueue": null,
+            "priority": "high",
+            "eligible": false,
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "TERMINATION_HISTORY_REVIEW_REQUIRED"
+            ],
+            "routedAt": "2026-08-24T12:00:00.000Z"
+          }
+        }
+      ]
+    },
+    {
+      "code": "DOCUSIGN",
+      "name": "DocuSign Demo Electronic Signature",
+      "service": "electronicSignature",
+      "defaultScenario": "envelope_completed",
+      "scenarios": [
+        {
+          "id": "docusign_envelope_created",
+          "scenario": "envelope_created",
+          "description": "An electronic-signature envelope is created and sent to the applicant.",
+          "outcome": "SENT",
+          "httpStatus": 201,
+          "latencyMs": 400,
+          "requestMatch": {
+            "signatureKey": "DOCUSIGN-DEMO-SENT"
+          },
+          "response": {
+            "envelopeId": "DOCUSIGN-DEMO-9001",
+            "status": "SENT",
+            "subject": "Synthetic onboarding contract package",
+            "recipient": {
+              "name": "Jamie Sample",
+              "email": "jamie.sample@example.test",
+              "status": "SENT"
+            },
+            "documents": [
+              {
+                "documentId": "DOC-DEMO-9001-1",
+                "name": "Producer Contract Package",
+                "status": "READY_FOR_SIGNATURE"
+              }
+            ],
+            "esignConsent": false,
+            "signedAt": null,
+            "declinedAt": null,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "createdAt": "2026-08-24T12:00:00.000Z"
+          }
+        },
+        {
+          "id": "docusign_envelope_completed",
+          "scenario": "envelope_completed",
+          "description": "The applicant consents and signs all required documents.",
+          "outcome": "COMPLETED",
+          "httpStatus": 200,
+          "latencyMs": 420,
+          "requestMatch": {
+            "signatureKey": "DOCUSIGN-DEMO-COMPLETE"
+          },
+          "response": {
+            "envelopeId": "DOCUSIGN-DEMO-9002",
+            "status": "COMPLETED",
+            "subject": "Synthetic onboarding contract package",
+            "recipient": {
+              "name": "Jordan Fixture",
+              "email": "jordan.fixture@example.test",
+              "status": "COMPLETED"
+            },
+            "documents": [
+              {
+                "documentId": "DOC-DEMO-9002-1",
+                "name": "Producer Contract Package",
+                "status": "SIGNED"
+              },
+              {
+                "documentId": "DOC-DEMO-9002-2",
+                "name": "Electronic Delivery Consent",
+                "status": "SIGNED"
+              }
+            ],
+            "esignConsent": true,
+            "signedAt": "2026-08-24T12:00:00.000Z",
+            "declinedAt": null,
+            "manualReviewRequired": false,
+            "validationCodes": [],
+            "createdAt": "2026-08-24T11:45:00.000Z"
+          }
+        },
+        {
+          "id": "docusign_envelope_declined",
+          "scenario": "envelope_declined",
+          "description": "The applicant declines to sign the contract package.",
+          "outcome": "DECLINED",
+          "httpStatus": 200,
+          "latencyMs": 390,
+          "requestMatch": {
+            "signatureKey": "DOCUSIGN-DEMO-DECLINED"
+          },
+          "response": {
+            "envelopeId": "DOCUSIGN-DEMO-9003",
+            "status": "DECLINED",
+            "subject": "Synthetic onboarding contract package",
+            "recipient": {
+              "name": "Riley Scenario",
+              "email": "riley.scenario@example.test",
+              "status": "DECLINED"
+            },
+            "documents": [
+              {
+                "documentId": "DOC-DEMO-9003-1",
+                "name": "Producer Contract Package",
+                "status": "UNSIGNED"
+              }
+            ],
+            "esignConsent": false,
+            "signedAt": null,
+            "declinedAt": "2026-08-24T12:00:00.000Z",
+            "manualReviewRequired": true,
+            "validationCodes": [
+              "ESIGN_ENVELOPE_DECLINED"
+            ],
+            "createdAt": "2026-08-24T11:30:00.000Z"
+          }
+        },
+        {
+          "id": "docusign_envelope_expired",
+          "scenario": "envelope_expired",
+          "description": "The electronic-signature envelope expires before completion.",
+          "outcome": "EXPIRED",
+          "httpStatus": 200,
+          "latencyMs": 240,
+          "requestMatch": {
+            "signatureKey": "DOCUSIGN-DEMO-EXPIRED"
+          },
+          "response": {
+            "envelopeId": "DOCUSIGN-DEMO-9004",
+            "status": "EXPIRED",
+            "subject": "Synthetic onboarding contract package",
+            "recipient": {
+              "name": "Taylor Example",
+              "email": "taylor.example@example.test",
+              "status": "DELIVERED"
+            },
+            "documents": [
+              {
+                "documentId": "DOC-DEMO-9004-1",
+                "name": "Producer Contract Package",
+                "status": "UNSIGNED"
+              }
+            ],
+            "esignConsent": true,
+            "signedAt": null,
+            "declinedAt": null,
+            "expiredAt": "2026-08-24T12:00:00.000Z",
+            "manualReviewRequired": false,
+            "validationCodes": [
+              "ESIGN_ENVELOPE_EXPIRED"
+            ],
+            "createdAt": "2026-08-17T12:00:00.000Z"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,501 @@
+{
+  "schemaVersion": 1,
+  "fixtureVersion": "2026.08.24",
+  "description": "Synthetic intake samples for digital onboarding demonstrations. All people, organizations, identifiers, and contact details are fictitious.",
+  "defaults": {
+    "partnerCode": "DEMO_PARTNER",
+    "gaCode": "GA100",
+    "company": "Banner",
+    "agencyType": "traditional",
+    "requestType": "new_onboarding"
+  },
+  "supportedSourceChannels": [
+    "SFTP",
+    "EMAIL",
+    "MAIL",
+    "FAX",
+    "API",
+    "PARTNER_DASHBOARD",
+    "MANUAL"
+  ],
+  "supportedSourceFormats": [
+    "QUILITY_JSON",
+    "ETHOS_XML",
+    "DTCC_FLAT_FILE",
+    "SURELC_TIF",
+    "MANUAL_FORM",
+    "CHANGE_REQUEST"
+  ],
+  "samples": [
+    {
+      "id": "intake_quility_complete_valid",
+      "name": "Quility JSON — complete individual producer",
+      "description": "A complete Banner individual producer submission received through SFTP.",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "QUILITY_JSON",
+      "fileName": "quility_banner_complete_001.json",
+      "mimeType": "application/json",
+      "bulk": false,
+      "simulateScenario": "complete_valid",
+      "partnerCode": "QUILITY",
+      "rawContent": "{\"submissionId\":\"QLT-DEMO-1001\",\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agency\":{\"type\":\"traditional\",\"name\":\"Demo Partner Agency\",\"taxIdLast4\":\"4321\"},\"contract\":{\"type\":\"individual\",\"level\":10,\"commissionSchedule\":\"STANDARD\",\"advanceCommission\":false},\"agent\":{\"firstName\":\"Jamie\",\"middleName\":\"Q\",\"lastName\":\"Sample\",\"email\":\"jamie.sample@example.test\",\"phone\":\"2025550101\",\"npn\":\"1001001\",\"residenceState\":\"PA\",\"dateOfBirth\":\"1988-04-12\",\"taxIdLast4\":\"1001\"},\"licensing\":{\"residentState\":\"PA\",\"licenseNumber\":\"PA-DEMO-1001\",\"linesOfAuthority\":[\"LIFE\",\"ACCIDENT_HEALTH\"]},\"banking\":{\"paymentMethod\":\"EFT\",\"routingNumberMasked\":\"*****1100\",\"accountNumberMasked\":\"*****6789\",\"accountType\":\"checking\"},\"attestations\":{\"backgroundQuestionsClear\":true,\"electronicDeliveryConsent\":true}}",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "AUTO_SUBMIT_ELIGIBLE",
+        "company": "Banner",
+        "journeyType": "agent_contracting",
+        "validationCodes": []
+      }
+    },
+    {
+      "id": "intake_quility_incomplete_online",
+      "name": "Quility JSON — missing banking and E&O",
+      "description": "An otherwise valid submission that must continue through the guided journey.",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "QUILITY_JSON",
+      "fileName": "quility_banner_incomplete_002.json",
+      "mimeType": "application/json",
+      "bulk": false,
+      "simulateScenario": "incomplete_online_completable",
+      "partnerCode": "QUILITY",
+      "rawContent": "{\"submissionId\":\"QLT-DEMO-1002\",\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agency\":{\"type\":\"traditional\",\"name\":\"Demo Partner Agency\"},\"contract\":{\"type\":\"individual\",\"level\":10,\"commissionSchedule\":\"SENIOR\",\"advanceCommission\":true},\"agent\":{\"firstName\":\"Taylor\",\"lastName\":\"Example\",\"email\":\"taylor.example@example.test\",\"phone\":\"2025550102\",\"npn\":\"1001002\",\"residenceState\":\"UT\",\"dateOfBirth\":\"1990-08-23\"},\"licensing\":{\"residentState\":\"UT\",\"licenseNumber\":\"UT-DEMO-1002\",\"linesOfAuthority\":[\"LIFE\"]},\"banking\":null,\"errorsAndOmissions\":null,\"attestations\":{\"backgroundQuestionsClear\":true,\"electronicDeliveryConsent\":true}}",
+      "expected": {
+        "completenessStatus": "INCOMPLETE_ONLINE_COMPLETABLE",
+        "nextAction": "JOURNEY_REQUIRED",
+        "company": "Banner",
+        "journeyType": "agent_contracting",
+        "missingFields": [
+          "banking.paymentMethod",
+          "banking.routingNumber",
+          "banking.accountNumber",
+          "errorsAndOmissions.policyNumber"
+        ],
+        "validationCodes": [
+          "EO_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "intake_quility_corporate_missing_principal",
+      "name": "Quility JSON — corporate contract without eligible principal",
+      "description": "A corporate submission that is complete enough to import but fails a principal eligibility rule.",
+      "sourceChannel": "API",
+      "sourceFormat": "QUILITY_JSON",
+      "fileName": "quility_corporate_exception_003.json",
+      "mimeType": "application/json",
+      "bulk": false,
+      "simulateScenario": "corporate_principal_ineligible",
+      "partnerCode": "QUILITY",
+      "rawContent": "{\"submissionId\":\"QLT-DEMO-1003\",\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agency\":{\"type\":\"traditional\",\"name\":\"Synthetic Summit Insurance LLC\",\"taxIdLast4\":\"3003\"},\"contract\":{\"type\":\"corporate\",\"level\":30,\"commissionSchedule\":\"AGENCY\",\"advanceCommission\":false},\"agent\":{\"firstName\":\"Casey\",\"lastName\":\"Corporate\",\"email\":\"casey.corporate@example.test\",\"phone\":\"2025550103\",\"npn\":\"1001003\",\"residenceState\":\"VA\"},\"principals\":[{\"firstName\":\"Robin\",\"lastName\":\"Principal\",\"email\":\"robin.principal@example.test\",\"ownershipPercent\":100,\"isLicensedEligible\":false}],\"attestations\":{\"backgroundQuestionsClear\":true,\"electronicDeliveryConsent\":true}}",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "MANUAL_EXCEPTION",
+        "company": "Banner",
+        "journeyType": "corporate",
+        "validationCodes": [
+          "CORPORATE_LICENSED_PRINCIPAL_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "intake_ethos_complete_valid",
+      "name": "Ethos XML — complete Banner submission",
+      "description": "A complete Ethos individual producer payload received through the simulated API.",
+      "sourceChannel": "API",
+      "sourceFormat": "ETHOS_XML",
+      "fileName": "ethos_banner_complete_001.xml",
+      "mimeType": "application/xml",
+      "bulk": false,
+      "simulateScenario": "complete_valid",
+      "partnerCode": "ETHOS",
+      "rawContent": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OnboardingSubmission version=\"1.0\">\n  <SubmissionId>ETH-DEMO-2001</SubmissionId>\n  <RequestType>new_onboarding</RequestType>\n  <Company>Banner</Company>\n  <GeneralAgency code=\"GA100\">Demo General Agency</GeneralAgency>\n  <Agency type=\"traditional\">\n    <Name>Ethos Demo Agency</Name>\n  </Agency>\n  <Contract type=\"individual\">\n    <Level>10</Level>\n    <CommissionSchedule>STANDARD</CommissionSchedule>\n    <AdvanceCommission>false</AdvanceCommission>\n  </Contract>\n  <Agent>\n    <FirstName>Jordan</FirstName>\n    <LastName>Fixture</LastName>\n    <Email>jordan.fixture@example.test</Email>\n    <Phone>2025550201</Phone>\n    <NPN>2002001</NPN>\n    <ResidenceState>TX</ResidenceState>\n    <License residentState=\"TX\" number=\"TX-DEMO-2001\">\n      <LineOfAuthority>LIFE</LineOfAuthority>\n    </License>\n  </Agent>\n  <Attestations>\n    <BackgroundQuestionsClear>true</BackgroundQuestionsClear>\n    <ElectronicDeliveryConsent>true</ElectronicDeliveryConsent>\n  </Attestations>\n</OnboardingSubmission>",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "AUTO_SUBMIT_ELIGIBLE",
+        "company": "Banner",
+        "journeyType": "agent_contracting",
+        "validationCodes": []
+      }
+    },
+    {
+      "id": "intake_ethos_william_penn_invalid_agency",
+      "name": "Ethos XML — unsupported William Penn agency type",
+      "description": "A well-formed XML submission that violates the William Penn carrier agency rule.",
+      "sourceChannel": "API",
+      "sourceFormat": "ETHOS_XML",
+      "fileName": "ethos_william_penn_invalid_002.xml",
+      "mimeType": "application/xml",
+      "bulk": false,
+      "simulateScenario": "carrier_rule_failure",
+      "partnerCode": "ETHOS",
+      "rawContent": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OnboardingSubmission version=\"1.0\">\n  <SubmissionId>ETH-DEMO-2002</SubmissionId>\n  <RequestType>new_onboarding</RequestType>\n  <Company>WilliamPenn</Company>\n  <GeneralAgency code=\"GA100\">Demo General Agency</GeneralAgency>\n  <Agency type=\"non_traditional\">\n    <Name>Ethos Non-Traditional Demo</Name>\n  </Agency>\n  <Contract type=\"individual\">\n    <Level>10</Level>\n    <CommissionSchedule>STANDARD</CommissionSchedule>\n    <AdvanceCommission>false</AdvanceCommission>\n  </Contract>\n  <Agent>\n    <FirstName>Riley</FirstName>\n    <LastName>Scenario</LastName>\n    <Email>riley.scenario@example.test</Email>\n    <Phone>2025550202</Phone>\n    <NPN>2002002</NPN>\n    <ResidenceState>NY</ResidenceState>\n    <License residentState=\"NY\" number=\"NY-DEMO-2002\">\n      <LineOfAuthority>LIFE</LineOfAuthority>\n    </License>\n  </Agent>\n</OnboardingSubmission>",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "MANUAL_EXCEPTION",
+        "company": "WilliamPenn",
+        "journeyType": "agent_contracting",
+        "validationCodes": [
+          "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED"
+        ]
+      }
+    },
+    {
+      "id": "intake_ethos_malformed_xml",
+      "name": "Ethos XML — malformed document",
+      "description": "An XML parsing failure used to verify rejected intake behavior.",
+      "sourceChannel": "EMAIL",
+      "sourceFormat": "ETHOS_XML",
+      "fileName": "ethos_malformed_003.xml",
+      "mimeType": "application/xml",
+      "bulk": false,
+      "simulateScenario": "parse_error",
+      "partnerCode": "ETHOS",
+      "rawContent": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<OnboardingSubmission>\n  <SubmissionId>ETH-DEMO-2003</SubmissionId>\n  <Company>Banner</Company>\n  <Agent>\n    <FirstName>Malformed</FirstName>\n    <LastName>Example</LastName>\n  </OnboardingSubmission>",
+      "expected": {
+        "completenessStatus": "REJECTED",
+        "nextAction": "REJECT",
+        "validationCodes": [
+          "IMPORT_PARSE_ERROR"
+        ]
+      }
+    },
+    {
+      "id": "intake_dtcc_single_registered_rep",
+      "name": "DTCC flat file — registered representative",
+      "description": "A single valid registered representative record using a pipe-delimited DTCC layout.",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "DTCC_FLAT_FILE",
+      "fileName": "dtcc_registered_rep_20260824.dat",
+      "mimeType": "text/plain",
+      "bulk": false,
+      "simulateScenario": "registered_rep_complete",
+      "partnerCode": "DTCC_DEMO",
+      "layout": {
+        "delimiter": "|",
+        "hasHeader": true,
+        "lineEnding": "LF"
+      },
+      "rawContent": "RECORD_TYPE|SUBMISSION_ID|COMPANY|GA_CODE|AGENCY_TYPE|CONTRACT_TYPE|FIRST_NAME|LAST_NAME|EMAIL|NPN|RESIDENCE_STATE|CRD|LEVEL|COMMISSION_SCHEDULE\nREP|DTCC-DEMO-3001|Banner|GA100|financial_institution|registered_representative|Avery|Representative|avery.representative@example.test|3003001|NJ|700001|10|STANDARD",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "AUTO_SUBMIT_ELIGIBLE",
+        "recordCount": 1,
+        "journeyType": "registered_rep",
+        "derived": {
+          "backgroundRequired": false,
+          "backgroundReason": "REGISTERED_REP_EXEMPT"
+        },
+        "validationCodes": []
+      }
+    },
+    {
+      "id": "intake_dtcc_bulk_mixed",
+      "name": "DTCC flat file — mixed bulk batch",
+      "description": "A three-record batch containing a valid record, a missing NPN, and an unsupported carrier combination.",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "DTCC_FLAT_FILE",
+      "fileName": "dtcc_bulk_mixed_20260824.dat",
+      "mimeType": "text/plain",
+      "bulk": true,
+      "simulateScenario": "bulk_mixed_outcomes",
+      "partnerCode": "DTCC_DEMO",
+      "layout": {
+        "delimiter": "|",
+        "hasHeader": true,
+        "lineEnding": "LF"
+      },
+      "rawContent": "RECORD_TYPE|SUBMISSION_ID|COMPANY|GA_CODE|AGENCY_TYPE|CONTRACT_TYPE|FIRST_NAME|LAST_NAME|EMAIL|NPN|RESIDENCE_STATE|CRD|LEVEL|COMMISSION_SCHEDULE\nREP|DTCC-DEMO-3010|Banner|GA100|financial_institution|registered_representative|Morgan|Valid|morgan.valid@example.test|3003010|OH|700010|10|STANDARD\nREP|DTCC-DEMO-3011|Banner|GA100|financial_institution|registered_representative|Skyler|Missing|skyler.missing@example.test||IL|700011|10|STANDARD\nREP|DTCC-DEMO-3012|WilliamPenn|GA100|non_traditional|registered_representative|Cameron|Carrier|cameron.carrier@example.test|3003012|NY|700012|30|AGENCY",
+      "expected": {
+        "completenessStatus": "MIXED",
+        "nextAction": "PER_RECORD_ROUTING",
+        "recordCount": 3,
+        "summary": {
+          "received": 3,
+          "normalized": 2,
+          "rejected": 1,
+          "requiresJourney": 0,
+          "manualExceptions": 1
+        },
+        "recordOutcomes": [
+          {
+            "submissionId": "DTCC-DEMO-3010",
+            "status": "COMPLETE",
+            "validationCodes": []
+          },
+          {
+            "submissionId": "DTCC-DEMO-3011",
+            "status": "REJECTED",
+            "validationCodes": [
+              "NPN_REQUIRED"
+            ]
+          },
+          {
+            "submissionId": "DTCC-DEMO-3012",
+            "status": "MANUAL_EXCEPTION",
+            "validationCodes": [
+              "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED",
+              "WILLIAM_PENN_LEVEL_30_UNSUPPORTED"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "intake_surelc_tif_metadata",
+      "name": "SureLC TIF — scanned contracting packet metadata",
+      "description": "Synthetic metadata for a multi-page TIF document with extracted OCR fields.",
+      "sourceChannel": "EMAIL",
+      "sourceFormat": "SURELC_TIF",
+      "fileName": "surelc_packet_demo_4001.tif",
+      "mimeType": "image/tiff",
+      "bulk": false,
+      "simulateScenario": "ocr_review_required",
+      "partnerCode": "SURELC_DEMO",
+      "rawContent": "{\"documentId\":\"TIF-DEMO-4001\",\"fileName\":\"surelc_packet_demo_4001.tif\",\"pageCount\":8,\"colorMode\":\"grayscale\",\"dpi\":300,\"receivedAt\":\"2026-08-24T09:15:00.000Z\",\"checksum\":\"demo-sha256-4001\",\"ocr\":{\"engine\":\"DEMO_OCR\",\"overallConfidence\":0.91,\"fields\":{\"company\":{\"value\":\"Banner\",\"confidence\":0.99},\"gaCode\":{\"value\":\"GA100\",\"confidence\":0.98},\"agencyType\":{\"value\":\"traditional\",\"confidence\":0.96},\"contractType\":{\"value\":\"individual\",\"confidence\":0.97},\"firstName\":{\"value\":\"Quinn\",\"confidence\":0.95},\"lastName\":{\"value\":\"Scan\",\"confidence\":0.94},\"email\":{\"value\":\"quinn.scan@example.test\",\"confidence\":0.93},\"npn\":{\"value\":\"4004001\",\"confidence\":0.89},\"residenceState\":{\"value\":\"CO\",\"confidence\":0.96},\"commissionSchedule\":{\"value\":\"STANDARD\",\"confidence\":0.72}},\"unreadableFields\":[\"banking.routingNumber\",\"banking.accountNumber\"],\"signatureDetected\":true}}",
+      "expected": {
+        "completenessStatus": "INCOMPLETE_ONLINE_COMPLETABLE",
+        "nextAction": "JOURNEY_REQUIRED",
+        "journeyType": "agent_contracting",
+        "manualReviewFields": [
+          "contract.commissionSchedule"
+        ],
+        "missingFields": [
+          "banking.routingNumber",
+          "banking.accountNumber"
+        ],
+        "validationCodes": [
+          "OCR_LOW_CONFIDENCE",
+          "BANKING_DETAILS_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "intake_mail_ocr_complete",
+      "name": "Mail OCR — paper individual application",
+      "description": "A mailed paper application converted to normalized OCR text.",
+      "sourceChannel": "MAIL",
+      "sourceFormat": "MANUAL_FORM",
+      "fileName": "mail_scan_demo_5001.pdf",
+      "mimeType": "application/pdf",
+      "bulk": false,
+      "simulateScenario": "mail_ocr_complete",
+      "partnerCode": "MAILROOM_DEMO",
+      "rawContent": "{\"documentId\":\"MAIL-DEMO-5001\",\"receivedDate\":\"2026-08-22\",\"pageCount\":6,\"ocrConfidence\":0.96,\"extractedFields\":{\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agencyType\":\"traditional\",\"contractType\":\"individual\",\"firstName\":\"Devon\",\"lastName\":\"Paper\",\"email\":\"devon.paper@example.test\",\"phone\":\"2025550501\",\"npn\":\"5005001\",\"residenceState\":\"NC\",\"licenseNumber\":\"NC-DEMO-5001\",\"level\":10,\"commissionSchedule\":\"STANDARD\",\"advanceCommission\":false,\"backgroundQuestionsClear\":true,\"signaturePresent\":true},\"sourceNotes\":\"Synthetic mailroom scan; no physical document exists.\"}",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "AUTO_SUBMIT_ELIGIBLE",
+        "journeyType": "agent_contracting",
+        "validationCodes": []
+      }
+    },
+    {
+      "id": "intake_fax_ocr_low_quality",
+      "name": "Fax OCR — low-quality and incomplete",
+      "description": "A low-resolution fax with ambiguous identifiers and missing consent.",
+      "sourceChannel": "FAX",
+      "sourceFormat": "MANUAL_FORM",
+      "fileName": "fax_scan_demo_5002.tif",
+      "mimeType": "image/tiff",
+      "bulk": false,
+      "simulateScenario": "fax_low_confidence",
+      "partnerCode": "FAX_DEMO",
+      "rawContent": "{\"documentId\":\"FAX-DEMO-5002\",\"receivedAt\":\"2026-08-23T16:40:00.000Z\",\"pageCount\":4,\"faxResolution\":\"standard\",\"ocrConfidence\":0.63,\"extractedFields\":{\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agencyType\":\"traditional\",\"contractType\":\"individual\",\"firstName\":\"Reese\",\"lastName\":\"Fax\",\"email\":\"reese.fax@example.test\",\"npn\":\"5OO5OO2\",\"residenceState\":\"AZ\",\"commissionSchedule\":\"STANDARD\",\"signaturePresent\":false},\"ambiguousFields\":[{\"field\":\"npn\",\"value\":\"5OO5OO2\",\"confidence\":0.41,\"reason\":\"Letter O and digit 0 cannot be distinguished\"}],\"missingFields\":[\"phone\",\"licenseNumber\",\"attestations.electronicDeliveryConsent\"]}",
+      "expected": {
+        "completenessStatus": "INCOMPLETE_ONLINE_COMPLETABLE",
+        "nextAction": "JOURNEY_REQUIRED",
+        "journeyType": "agent_contracting",
+        "manualReviewFields": [
+          "agent.npn"
+        ],
+        "missingFields": [
+          "agent.phone",
+          "licensing.licenseNumber",
+          "attestations.electronicDeliveryConsent"
+        ],
+        "validationCodes": [
+          "OCR_LOW_CONFIDENCE",
+          "NPN_INVALID_FORMAT",
+          "ESIGN_CONSENT_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "intake_email_attachment_complete",
+      "name": "Email — complete JSON attachment",
+      "description": "A complete onboarding request received as an email attachment.",
+      "sourceChannel": "EMAIL",
+      "sourceFormat": "QUILITY_JSON",
+      "fileName": "email_attachment_demo_6001.json",
+      "mimeType": "application/json",
+      "bulk": false,
+      "simulateScenario": "email_attachment_complete",
+      "partnerCode": "EMAIL_DEMO",
+      "envelope": {
+        "messageId": "email-demo-6001@example.test",
+        "from": "intake.sender@example.test",
+        "to": [
+          "onboarding@example.test"
+        ],
+        "subject": "Synthetic onboarding submission EMAIL-DEMO-6001",
+        "receivedAt": "2026-08-24T08:05:00.000Z",
+        "attachmentCount": 1
+      },
+      "rawContent": "{\"submissionId\":\"EMAIL-DEMO-6001\",\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agency\":{\"type\":\"traditional\",\"name\":\"Email Demo Agency\"},\"contract\":{\"type\":\"individual\",\"level\":20,\"commissionSchedule\":\"SENIOR\",\"advanceCommission\":false},\"agent\":{\"firstName\":\"Emerson\",\"lastName\":\"Inbox\",\"email\":\"emerson.inbox@example.test\",\"phone\":\"2025550601\",\"npn\":\"6006001\",\"residenceState\":\"FL\",\"dateOfBirth\":\"1986-11-19\"},\"licensing\":{\"residentState\":\"FL\",\"licenseNumber\":\"FL-DEMO-6001\",\"linesOfAuthority\":[\"LIFE\"]},\"attestations\":{\"backgroundQuestionsClear\":true,\"electronicDeliveryConsent\":true}}",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "AUTO_SUBMIT_ELIGIBLE",
+        "journeyType": "agent_contracting",
+        "validationCodes": []
+      }
+    },
+    {
+      "id": "intake_email_body_manual",
+      "name": "Email — unstructured body requiring guided entry",
+      "description": "An email without a structured attachment that contains enough information to create a draft.",
+      "sourceChannel": "EMAIL",
+      "sourceFormat": "MANUAL_FORM",
+      "fileName": "email_body_demo_6002.eml",
+      "mimeType": "message/rfc822",
+      "bulk": false,
+      "simulateScenario": "unstructured_email",
+      "partnerCode": "EMAIL_DEMO",
+      "envelope": {
+        "messageId": "email-demo-6002@example.test",
+        "from": "agency.contact@example.test",
+        "to": [
+          "onboarding@example.test"
+        ],
+        "subject": "New producer setup request",
+        "receivedAt": "2026-08-24T08:25:00.000Z",
+        "attachmentCount": 0
+      },
+      "rawContent": "Please begin a synthetic Banner onboarding request for Sidney Message at Demo Email Agency. NPN: 6006002. Residence state: WA. Email: sidney.message@example.test. Use GA100 and the standard individual contract. Banking, license details, and attestations will be completed online.",
+      "expected": {
+        "completenessStatus": "INCOMPLETE_ONLINE_COMPLETABLE",
+        "nextAction": "JOURNEY_REQUIRED",
+        "journeyType": "agent_contracting",
+        "missingFields": [
+          "agent.phone",
+          "licensing.licenseNumber",
+          "licensing.linesOfAuthority",
+          "banking.paymentMethod",
+          "attestations.backgroundQuestionsClear",
+          "attestations.electronicDeliveryConsent"
+        ],
+        "validationCodes": []
+      }
+    },
+    {
+      "id": "intake_sftp_duplicate_in_progress",
+      "name": "SFTP — duplicate in-progress producer",
+      "description": "A valid SFTP record configured to match an existing in-progress NPN and company.",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "QUILITY_JSON",
+      "fileName": "sftp_duplicate_demo_7001.json",
+      "mimeType": "application/json",
+      "bulk": false,
+      "simulateScenario": "duplicate_in_progress",
+      "partnerCode": "SFTP_DEMO",
+      "rawContent": "{\"submissionId\":\"SFTP-DEMO-7001\",\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agency\":{\"type\":\"traditional\",\"name\":\"SFTP Demo Agency\"},\"contract\":{\"type\":\"individual\",\"level\":10,\"commissionSchedule\":\"STANDARD\",\"advanceCommission\":false},\"agent\":{\"firstName\":\"Harper\",\"lastName\":\"Duplicate\",\"email\":\"harper.duplicate@example.test\",\"phone\":\"2025550701\",\"npn\":\"7007001\",\"residenceState\":\"MI\"},\"licensing\":{\"residentState\":\"MI\",\"licenseNumber\":\"MI-DEMO-7001\",\"linesOfAuthority\":[\"LIFE\"]},\"attestations\":{\"backgroundQuestionsClear\":true,\"electronicDeliveryConsent\":true}}",
+      "scenarioContext": {
+        "existingApplication": {
+          "trackingId": "TRK-DEMO-7000",
+          "applicationId": "APP-DEMO-7000",
+          "company": "Banner",
+          "npn": "7007001",
+          "status": "APPLICATION_STARTED"
+        }
+      },
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "MANUAL_EXCEPTION",
+        "journeyType": "agent_contracting",
+        "validationCodes": [
+          "DUPLICATE_APPLICATION_IN_PROGRESS"
+        ]
+      }
+    },
+    {
+      "id": "intake_manual_partner_dashboard",
+      "name": "Partner dashboard — manual agency start",
+      "description": "A minimal manually initiated agency onboarding request.",
+      "sourceChannel": "PARTNER_DASHBOARD",
+      "sourceFormat": "MANUAL_FORM",
+      "fileName": null,
+      "mimeType": null,
+      "bulk": false,
+      "simulateScenario": "manual_start",
+      "partnerCode": "DEMO_PARTNER",
+      "rawContent": "{\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agencyType\":\"traditional\",\"contractType\":\"corporate\",\"organization\":{\"legalName\":\"Synthetic Harbor Agency LLC\",\"email\":\"agency.owner@example.test\",\"stateOfFormation\":\"DE\",\"taxIdLast4\":\"8001\"}}",
+      "expected": {
+        "completenessStatus": "INCOMPLETE_ONLINE_COMPLETABLE",
+        "nextAction": "JOURNEY_REQUIRED",
+        "journeyType": "ga_agency",
+        "missingFields": [
+          "organization.address",
+          "principals",
+          "licensing",
+          "banking",
+          "attestations"
+        ],
+        "validationCodes": [
+          "CORPORATE_LICENSED_PRINCIPAL_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "intake_rejected_missing_mandatory_fields",
+      "name": "Manual intake — mandatory routing fields missing",
+      "description": "A record that cannot be routed because carrier, GA, and applicant identity are absent.",
+      "sourceChannel": "MANUAL",
+      "sourceFormat": "MANUAL_FORM",
+      "fileName": null,
+      "mimeType": null,
+      "bulk": false,
+      "simulateScenario": "missing_mandatory_fields",
+      "partnerCode": "DEMO_PARTNER",
+      "rawContent": "{\"requestType\":\"new_onboarding\",\"notes\":\"Synthetic incomplete request with no carrier, GA, contract type, or applicant identity.\"}",
+      "expected": {
+        "completenessStatus": "REJECTED",
+        "nextAction": "REJECT",
+        "missingFields": [
+          "company",
+          "gaCode",
+          "agencyType",
+          "contractType",
+          "agent.firstName",
+          "agent.lastName",
+          "agent.npn"
+        ],
+        "validationCodes": [
+          "COMPANY_REQUIRED",
+          "GA_CODE_REQUIRED",
+          "AGENCY_TYPE_REQUIRED",
+          "CONTRACT_TYPE_REQUIRED",
+          "APPLICANT_IDENTITY_REQUIRED"
+        ]
+      }
+    },
+    {
+      "id": "intake_quility_abnca_advance_invalid",
+      "name": "Quility JSON — ABNCA with advance commission",
+      "description": "A complete submission that fails the ABNCA advance commission rule.",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "QUILITY_JSON",
+      "fileName": "quility_abnca_advance_9001.json",
+      "mimeType": "application/json",
+      "bulk": false,
+      "simulateScenario": "commission_rule_failure",
+      "partnerCode": "QUILITY",
+      "rawContent": "{\"submissionId\":\"QLT-DEMO-9001\",\"requestType\":\"new_onboarding\",\"company\":\"Banner\",\"gaCode\":\"GA100\",\"agency\":{\"type\":\"traditional\",\"name\":\"Commission Demo Agency\"},\"contract\":{\"type\":\"individual\",\"level\":10,\"commissionSchedule\":\"ABNCA\",\"advanceCommission\":true},\"agent\":{\"firstName\":\"Peyton\",\"lastName\":\"Commission\",\"email\":\"peyton.commission@example.test\",\"phone\":\"2025550901\",\"npn\":\"9009001\",\"residenceState\":\"GA\"},\"licensing\":{\"residentState\":\"GA\",\"licenseNumber\":\"GA-DEMO-9001\",\"linesOfAuthority\":[\"LIFE\"]},\"attestations\":{\"backgroundQuestionsClear\":true,\"electronicDeliveryConsent\":true}}",
+      "expected": {
+        "completenessStatus": "COMPLETE",
+        "nextAction": "MANUAL_EXCEPTION",
+        "journeyType": "agent_contracting",
+        "validationCodes": [
+          "ABNCA_NO_ADVANCE"
+        ]
+      }
+    }
+  ]
+}

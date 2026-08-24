@@ -1,0 +1,1294 @@
+{
+  "schemaVersion": 1,
+  "fixtureVersion": "2026.08.24",
+  "description": "Synthetic operations data for workbench assignments, lifecycle tracking, notification visibility, synchronization history, and contract change demonstrations. All people, organizations, identifiers, and contact details are fictitious.",
+  "defaults": {
+    "generatedAt": "2026-08-24T12:00:00.000Z",
+    "workItemState": "pending",
+    "priority": "medium",
+    "notificationStatus": "previewed",
+    "syncStatus": "queued"
+  },
+  "workItems": [
+    {
+      "workItemId": "WI-DEMO-1001",
+      "trackingId": "TRK-DEMO-1003",
+      "sourceRecordId": "APP-DEMO-1003",
+      "cardType": "appointment",
+      "state": "pending",
+      "priority": "high",
+      "assignedTo": "usr_licensing_demo",
+      "assignedGroup": "licensing",
+      "partnerCode": "ETHOS",
+      "title": "Review multi-state appointment requirements",
+      "summary": "Confirm appointment eligibility for Pennsylvania and Ohio before submitting the carrier appointment request.",
+      "metadata": {
+        "company": "Banner",
+        "applicantName": "Riley Review",
+        "npnMasked": "***1003",
+        "states": [
+          "PA",
+          "OH"
+        ],
+        "dueAt": "2026-08-25T17:00:00.000Z",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-24T10:10:00.000Z",
+      "updatedAt": "2026-08-24T10:10:00.000Z",
+      "completedAt": null,
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "pending",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Appointment review item created after licensing review.",
+          "timestamp": "2026-08-24T10:10:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1002",
+      "trackingId": "TRK-DEMO-1004",
+      "sourceRecordId": "BGC-DEMO-1004",
+      "cardType": "background_check",
+      "state": "pending",
+      "priority": "medium",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "partnerCode": "EMAIL_DEMO",
+      "title": "Monitor pending background screening",
+      "summary": "The synthetic background provider accepted the request and has not returned a final disposition.",
+      "metadata": {
+        "company": "Banner",
+        "applicantName": "Casey Background",
+        "providerCode": "BACKGROUND_DEMO",
+        "providerReferenceId": "BGC-DEMO-1004",
+        "dueAt": "2026-08-25T13:30:00.000Z",
+        "validationCodes": [
+          "BACKGROUND_CHECK_PENDING"
+        ]
+      },
+      "createdAt": "2026-08-23T13:30:00.000Z",
+      "updatedAt": "2026-08-24T11:15:00.000Z",
+      "completedAt": null,
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "pending",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Background screening request accepted by the demo provider.",
+          "timestamp": "2026-08-23T13:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1003",
+      "trackingId": "TRK-DEMO-1005",
+      "sourceRecordId": "APT-DEMO-1005",
+      "cardType": "appointment",
+      "state": "action_needed",
+      "priority": "medium",
+      "assignedTo": "usr_licensing_demo",
+      "assignedGroup": "licensing",
+      "partnerCode": "DTCC_DEMO",
+      "title": "Appointment confirmation remains pending",
+      "summary": "State confirmations for New Jersey and New York remain pending and require follow-up.",
+      "metadata": {
+        "company": "Banner",
+        "applicantName": "Avery Appointment",
+        "providerCode": "NIPR",
+        "providerReferenceId": "APT-DEMO-1005",
+        "states": [
+          "NJ",
+          "NY"
+        ],
+        "dueAt": "2026-08-25T16:00:00.000Z",
+        "validationCodes": [
+          "APPOINTMENT_PENDING"
+        ]
+      },
+      "createdAt": "2026-08-22T16:20:00.000Z",
+      "updatedAt": "2026-08-24T12:05:00.000Z",
+      "completedAt": null,
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "pending",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Appointment monitoring item created.",
+          "timestamp": "2026-08-22T16:20:00.000Z"
+        },
+        {
+          "previousState": "pending",
+          "currentState": "action_needed",
+          "actorType": "internal_user",
+          "actorId": "usr_licensing_demo",
+          "comment": "State confirmation has exceeded the expected response window.",
+          "timestamp": "2026-08-24T12:05:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1004",
+      "trackingId": "TRK-DEMO-1009",
+      "sourceRecordId": "APP-DEMO-1009",
+      "cardType": "exception",
+      "state": "action_needed",
+      "priority": "high",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "partnerCode": "SFTP_DEMO",
+      "title": "Resolve duplicate onboarding application",
+      "summary": "The producer and carrier combination matches an onboarding application already in progress.",
+      "metadata": {
+        "company": "Banner",
+        "applicantName": "Parker Duplicate",
+        "duplicateOfApplicationId": "APP-DEMO-1008",
+        "dueAt": "2026-08-24T18:00:00.000Z",
+        "validationCodes": [
+          "DUPLICATE_APPLICATION_IN_PROGRESS"
+        ]
+      },
+      "createdAt": "2026-08-24T09:42:00.000Z",
+      "updatedAt": "2026-08-24T09:42:00.000Z",
+      "completedAt": null,
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "action_needed",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Duplicate detection routed the application for operational review.",
+          "timestamp": "2026-08-24T09:42:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1005",
+      "trackingId": "TRK-DEMO-1010",
+      "sourceRecordId": "APP-DEMO-1010",
+      "cardType": "distribution_approval",
+      "state": "action_needed",
+      "priority": "high",
+      "assignedTo": "usr_manager_demo",
+      "assignedGroup": "manager",
+      "partnerCode": "ETHOS",
+      "title": "Review William Penn corporate contracting exception",
+      "summary": "The selected agency arrangement is unsupported and the corporate applicant lacks an eligible licensed principal.",
+      "metadata": {
+        "company": "WilliamPenn",
+        "applicantName": "Synthetic Empire Financial LLC",
+        "requestedLevel": "AGENCY",
+        "dueAt": "2026-08-24T17:00:00.000Z",
+        "validationCodes": [
+          "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED",
+          "CORPORATE_LICENSED_PRINCIPAL_REQUIRED"
+        ]
+      },
+      "createdAt": "2026-08-24T10:25:00.000Z",
+      "updatedAt": "2026-08-24T10:25:00.000Z",
+      "completedAt": null,
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "action_needed",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Carrier and principal eligibility rules require manager review.",
+          "timestamp": "2026-08-24T10:25:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1006",
+      "trackingId": "TRK-DEMO-1006",
+      "sourceRecordId": "APP-DEMO-1006",
+      "cardType": "agency_review",
+      "state": "completed",
+      "priority": "medium",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "partnerCode": "QUILITY",
+      "title": "Confirm agency review before activation",
+      "summary": "The agency reviewed the completed producer package before carrier activation.",
+      "metadata": {
+        "company": "Banner",
+        "applicantName": "Morgan Contracted",
+        "reviewOutcome": "approved",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-12T14:00:00.000Z",
+      "updatedAt": "2026-08-13T09:30:00.000Z",
+      "completedAt": "2026-08-13T09:30:00.000Z",
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "pending",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Agency review requested.",
+          "timestamp": "2026-08-12T14:00:00.000Z"
+        },
+        {
+          "previousState": "pending",
+          "currentState": "completed",
+          "actorType": "internal_user",
+          "actorId": "usr_operations_demo",
+          "comment": "Agency approval received and recorded.",
+          "timestamp": "2026-08-13T09:30:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1007",
+      "trackingId": "TRK-DEMO-1006",
+      "sourceRecordId": "SYN-DEMO-1012",
+      "cardType": "sync_failure",
+      "state": "completed",
+      "priority": "high",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "partnerCode": "QUILITY",
+      "title": "Retry failed ALI activation synchronization",
+      "summary": "The first ALI activation attempt failed and was successfully retried.",
+      "metadata": {
+        "company": "Banner",
+        "system": "ali",
+        "failedSyncAttemptId": "SYN-DEMO-1012",
+        "resolvedSyncAttemptId": "SYN-DEMO-1013",
+        "validationCodes": [
+          "SYNC_RETRY_REQUIRED"
+        ]
+      },
+      "createdAt": "2026-08-15T14:35:00.000Z",
+      "updatedAt": "2026-08-15T14:50:00.000Z",
+      "completedAt": "2026-08-15T14:50:00.000Z",
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "action_needed",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "ALI synchronization failure created an operational work item.",
+          "timestamp": "2026-08-15T14:35:00.000Z"
+        },
+        {
+          "previousState": "action_needed",
+          "currentState": "completed",
+          "actorType": "internal_user",
+          "actorId": "usr_operations_demo",
+          "comment": "Synchronization retry completed successfully.",
+          "timestamp": "2026-08-15T14:50:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1008",
+      "trackingId": null,
+      "sourceRecordId": "DTCC-DEMO-CHANGE-8001",
+      "cardType": "dtcc_manual_change",
+      "state": "pending",
+      "priority": "medium",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "partnerCode": "DTCC_DEMO",
+      "title": "Process DTCC representative name correction",
+      "summary": "A non-onboarding DTCC name correction requires manual routing and validation.",
+      "metadata": {
+        "transactionType": "name_change",
+        "rawSummary": "Synthetic name correction for an existing representative.",
+        "receivedAt": "2026-08-24T11:20:00.000Z",
+        "dueAt": "2026-08-26T17:00:00.000Z",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-24T11:20:00.000Z",
+      "updatedAt": "2026-08-24T11:20:00.000Z",
+      "completedAt": null,
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "pending",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Non-onboarding DTCC transaction routed to the operations workbench.",
+          "timestamp": "2026-08-24T11:20:00.000Z"
+        }
+      ]
+    },
+    {
+      "workItemId": "WI-DEMO-1009",
+      "trackingId": "TRK-DEMO-1003",
+      "sourceRecordId": "APP-DEMO-1003",
+      "cardType": "explanation_letter",
+      "state": "completed",
+      "priority": "low",
+      "assignedTo": "usr_licensing_demo",
+      "assignedGroup": "licensing",
+      "partnerCode": "ETHOS",
+      "title": "Review applicant explanation letter",
+      "summary": "The submitted explanation letter was reviewed and accepted as part of licensing review.",
+      "metadata": {
+        "company": "Banner",
+        "applicantName": "Riley Review",
+        "documentReference": "DOC-DEMO-EXPL-1003",
+        "reviewOutcome": "accepted",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-23T15:30:00.000Z",
+      "updatedAt": "2026-08-24T09:45:00.000Z",
+      "completedAt": "2026-08-24T09:45:00.000Z",
+      "history": [
+        {
+          "previousState": null,
+          "currentState": "pending",
+          "actorType": "system",
+          "actorId": "system",
+          "comment": "Explanation letter queued for licensing review.",
+          "timestamp": "2026-08-23T15:30:00.000Z"
+        },
+        {
+          "previousState": "pending",
+          "currentState": "completed",
+          "actorType": "internal_user",
+          "actorId": "usr_licensing_demo",
+          "comment": "Document reviewed and accepted.",
+          "timestamp": "2026-08-24T09:45:00.000Z"
+        }
+      ]
+    }
+  ],
+  "assignments": [
+    {
+      "assignmentId": "ASN-DEMO-1001",
+      "workItemId": "WI-DEMO-1001",
+      "trackingId": "TRK-DEMO-1003",
+      "assignedTo": "usr_licensing_demo",
+      "assignedGroup": "licensing",
+      "assignedBy": "system",
+      "assignmentReason": "LICENSING_SKILL_ROUTING",
+      "status": "active",
+      "assignedAt": "2026-08-24T10:10:00.000Z",
+      "releasedAt": null
+    },
+    {
+      "assignmentId": "ASN-DEMO-1002",
+      "workItemId": "WI-DEMO-1002",
+      "trackingId": "TRK-DEMO-1004",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "assignedBy": "system",
+      "assignmentReason": "BACKGROUND_MONITORING",
+      "status": "active",
+      "assignedAt": "2026-08-23T13:30:00.000Z",
+      "releasedAt": null
+    },
+    {
+      "assignmentId": "ASN-DEMO-1003",
+      "workItemId": "WI-DEMO-1003",
+      "trackingId": "TRK-DEMO-1005",
+      "assignedTo": "usr_licensing_demo",
+      "assignedGroup": "licensing",
+      "assignedBy": "system",
+      "assignmentReason": "APPOINTMENT_MONITORING",
+      "status": "active",
+      "assignedAt": "2026-08-22T16:20:00.000Z",
+      "releasedAt": null
+    },
+    {
+      "assignmentId": "ASN-DEMO-1004",
+      "workItemId": "WI-DEMO-1004",
+      "trackingId": "TRK-DEMO-1009",
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "assignedBy": "system",
+      "assignmentReason": "DUPLICATE_REVIEW",
+      "status": "active",
+      "assignedAt": "2026-08-24T09:42:00.000Z",
+      "releasedAt": null
+    },
+    {
+      "assignmentId": "ASN-DEMO-1005",
+      "workItemId": "WI-DEMO-1005",
+      "trackingId": "TRK-DEMO-1010",
+      "assignedTo": "usr_manager_demo",
+      "assignedGroup": "manager",
+      "assignedBy": "system",
+      "assignmentReason": "CARRIER_RULE_ESCALATION",
+      "status": "active",
+      "assignedAt": "2026-08-24T10:25:00.000Z",
+      "releasedAt": null
+    },
+    {
+      "assignmentId": "ASN-DEMO-1006",
+      "workItemId": "WI-DEMO-1008",
+      "trackingId": null,
+      "assignedTo": "usr_operations_demo",
+      "assignedGroup": "operations",
+      "assignedBy": "system",
+      "assignmentReason": "DTCC_MANUAL_ROUTING",
+      "status": "active",
+      "assignedAt": "2026-08-24T11:20:00.000Z",
+      "releasedAt": null
+    },
+    {
+      "assignmentId": "ASN-DEMO-1007",
+      "workItemId": "WI-DEMO-1009",
+      "trackingId": "TRK-DEMO-1003",
+      "assignedTo": "usr_licensing_demo",
+      "assignedGroup": "licensing",
+      "assignedBy": "system",
+      "assignmentReason": "DOCUMENT_REVIEW",
+      "status": "released",
+      "assignedAt": "2026-08-23T15:30:00.000Z",
+      "releasedAt": "2026-08-24T09:45:00.000Z"
+    }
+  ],
+  "lifecycleEvents": [
+    {
+      "lifecycleEventId": "LCE-DEMO-1001",
+      "trackingId": "TRK-DEMO-1001",
+      "applicationId": "APP-DEMO-1001",
+      "status": "New",
+      "workflowStage": "NEW",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "partner_dashboard",
+      "summary": "A new onboarding request was created.",
+      "timestamp": "2026-08-24T08:10:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1002",
+      "trackingId": "TRK-DEMO-1001",
+      "applicationId": "APP-DEMO-1001",
+      "status": "Application Started",
+      "workflowStage": "APPLICATION_STARTED",
+      "actorType": "partner_user",
+      "actorId": "usr_partner_demo",
+      "source": "guided_journey",
+      "summary": "The partner started the producer onboarding journey.",
+      "timestamp": "2026-08-24T08:12:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1003",
+      "trackingId": "TRK-DEMO-1002",
+      "applicationId": "APP-DEMO-1002",
+      "status": "New",
+      "workflowStage": "NEW",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "sftp_intake",
+      "summary": "A structured SFTP onboarding record was accepted.",
+      "timestamp": "2026-08-24T09:03:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1004",
+      "trackingId": "TRK-DEMO-1002",
+      "applicationId": "APP-DEMO-1002",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "submission_service",
+      "summary": "The complete application was submitted for processing.",
+      "timestamp": "2026-08-24T09:05:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1005",
+      "trackingId": "TRK-DEMO-1003",
+      "applicationId": "APP-DEMO-1003",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "ethos_integration",
+      "summary": "The Ethos application was submitted.",
+      "timestamp": "2026-08-22T14:20:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1006",
+      "trackingId": "TRK-DEMO-1003",
+      "applicationId": "APP-DEMO-1003",
+      "status": "Application Under Review",
+      "workflowStage": "LICENSING_REVIEW",
+      "actorType": "internal_user",
+      "actorId": "usr_licensing_demo",
+      "source": "operations_workbench",
+      "summary": "Licensing review began.",
+      "timestamp": "2026-08-23T09:15:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1007",
+      "trackingId": "TRK-DEMO-1004",
+      "applicationId": "APP-DEMO-1004",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "email_intake",
+      "summary": "The email attachment was normalized and submitted.",
+      "timestamp": "2026-08-21T11:45:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1008",
+      "trackingId": "TRK-DEMO-1004",
+      "applicationId": "APP-DEMO-1004",
+      "status": "Application Under Review",
+      "workflowStage": "APPLICATION_UNDER_REVIEW",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "workflow_engine",
+      "summary": "The application entered operational review.",
+      "timestamp": "2026-08-22T08:30:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1009",
+      "trackingId": "TRK-DEMO-1004",
+      "applicationId": "APP-DEMO-1004",
+      "status": "Background Check",
+      "workflowStage": "BACKGROUND_CHECK",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "background_provider",
+      "summary": "The background screening request is pending.",
+      "timestamp": "2026-08-23T13:30:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1010",
+      "trackingId": "TRK-DEMO-1005",
+      "applicationId": "APP-DEMO-1005",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "dtcc_intake",
+      "summary": "The registered representative record was submitted.",
+      "timestamp": "2026-08-19T12:10:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1011",
+      "trackingId": "TRK-DEMO-1005",
+      "applicationId": "APP-DEMO-1005",
+      "status": "Application Under Review",
+      "workflowStage": "LICENSING_REVIEW",
+      "actorType": "internal_user",
+      "actorId": "usr_licensing_demo",
+      "source": "operations_workbench",
+      "summary": "Registration and license review completed.",
+      "timestamp": "2026-08-20T14:10:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1012",
+      "trackingId": "TRK-DEMO-1005",
+      "applicationId": "APP-DEMO-1005",
+      "status": "Background Check",
+      "workflowStage": "BACKGROUND_CHECK",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "background_provider",
+      "summary": "The registered representative background requirement was satisfied by exemption.",
+      "timestamp": "2026-08-20T15:00:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1013",
+      "trackingId": "TRK-DEMO-1005",
+      "applicationId": "APP-DEMO-1005",
+      "status": "Appointment",
+      "workflowStage": "APPOINTMENT_PENDING",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "appointment_provider",
+      "summary": "Appointment requests were submitted for New Jersey and New York.",
+      "timestamp": "2026-08-22T16:20:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1014",
+      "trackingId": "TRK-DEMO-1006",
+      "applicationId": "APP-DEMO-1006",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "quility_integration",
+      "summary": "The complete producer application was submitted.",
+      "timestamp": "2026-08-11T10:25:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1015",
+      "trackingId": "TRK-DEMO-1006",
+      "applicationId": "APP-DEMO-1006",
+      "status": "Application Under Review",
+      "workflowStage": "APPLICATION_UNDER_REVIEW",
+      "actorType": "internal_user",
+      "actorId": "usr_operations_demo",
+      "source": "operations_workbench",
+      "summary": "Operational review was completed.",
+      "timestamp": "2026-08-12T13:45:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1016",
+      "trackingId": "TRK-DEMO-1006",
+      "applicationId": "APP-DEMO-1006",
+      "status": "Background Check",
+      "workflowStage": "BACKGROUND_CHECK",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "background_provider",
+      "summary": "The background screening returned a clear disposition.",
+      "timestamp": "2026-08-13T17:10:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1017",
+      "trackingId": "TRK-DEMO-1006",
+      "applicationId": "APP-DEMO-1006",
+      "status": "Appointment",
+      "workflowStage": "APPOINTMENT",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "appointment_provider",
+      "summary": "Appointments were accepted for Ohio and Indiana.",
+      "timestamp": "2026-08-15T14:30:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1018",
+      "trackingId": "TRK-DEMO-1006",
+      "applicationId": "APP-DEMO-1006",
+      "status": "Contracted",
+      "workflowStage": "CONTRACTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "activation_sync",
+      "summary": "The producer contract was activated.",
+      "timestamp": "2026-08-15T15:00:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1019",
+      "trackingId": "TRK-DEMO-1007",
+      "applicationId": "APP-DEMO-1007",
+      "status": "Contracted",
+      "workflowStage": "CONTRACTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "historical_import",
+      "summary": "The active historical contract was imported.",
+      "timestamp": "2025-03-01T12:00:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1020",
+      "trackingId": "TRK-DEMO-1007",
+      "applicationId": "APP-DEMO-1007",
+      "status": "Terminated",
+      "workflowStage": "TERMINATED",
+      "actorType": "internal_user",
+      "actorId": "usr_operations_demo",
+      "source": "contract_change",
+      "summary": "The contract and associated appointment were terminated at partner request.",
+      "timestamp": "2026-08-18T18:00:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1021",
+      "trackingId": "TRK-DEMO-1008",
+      "applicationId": "APP-DEMO-1008",
+      "status": "Application Started",
+      "workflowStage": "APPLICATION_STARTED",
+      "actorType": "partner_user",
+      "actorId": "usr_partner_demo",
+      "source": "partner_dashboard",
+      "summary": "The original onboarding application was started.",
+      "timestamp": "2026-08-23T08:30:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1022",
+      "trackingId": "TRK-DEMO-1009",
+      "applicationId": "APP-DEMO-1009",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "sftp_intake",
+      "summary": "A second application for the same producer and carrier was submitted.",
+      "timestamp": "2026-08-24T09:40:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1023",
+      "trackingId": "TRK-DEMO-1009",
+      "applicationId": "APP-DEMO-1009",
+      "status": "Application Under Review",
+      "workflowStage": "DUPLICATE_REVIEW",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "duplicate_detection",
+      "summary": "The application was routed for duplicate review.",
+      "timestamp": "2026-08-24T09:42:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1024",
+      "trackingId": "TRK-DEMO-1010",
+      "applicationId": "APP-DEMO-1010",
+      "status": "Application Submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "ethos_integration",
+      "summary": "The William Penn corporate application was submitted.",
+      "timestamp": "2026-08-24T10:20:00.000Z"
+    },
+    {
+      "lifecycleEventId": "LCE-DEMO-1025",
+      "trackingId": "TRK-DEMO-1010",
+      "applicationId": "APP-DEMO-1010",
+      "status": "Application Under Review",
+      "workflowStage": "MANUAL_EXCEPTION",
+      "actorType": "system",
+      "actorId": "system",
+      "source": "eligibility_rules",
+      "summary": "Carrier and corporate principal exceptions require manual review.",
+      "timestamp": "2026-08-24T10:25:00.000Z"
+    }
+  ],
+  "notificationLogs": [
+    {
+      "notificationId": "NTF-DEMO-1001",
+      "trackingId": "TRK-DEMO-1001",
+      "partnerCode": "DEMO_PARTNER",
+      "channel": "email",
+      "type": "reminder",
+      "recipientMasked": "h***@example.test",
+      "templateCode": "ONBOARDING_DRAFT_REMINDER",
+      "previewPayload": {
+        "subject": "Resume your synthetic onboarding application",
+        "applicantName": "Harper Draft",
+        "currentStep": "Licensing",
+        "completionPercent": 35,
+        "callToAction": "Resume application"
+      },
+      "status": "previewed",
+      "createdAt": "2026-08-24T08:35:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1002",
+      "trackingId": "TRK-DEMO-1002",
+      "partnerCode": "QUILITY",
+      "channel": "in_app",
+      "type": "status_update",
+      "recipientMasked": "partner:QUILITY",
+      "templateCode": "APPLICATION_SUBMITTED",
+      "previewPayload": {
+        "title": "Application submitted",
+        "message": "APP-DEMO-1002 was submitted and is ready for operational processing.",
+        "status": "Application Submitted"
+      },
+      "status": "previewed",
+      "createdAt": "2026-08-24T09:05:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1003",
+      "trackingId": "TRK-DEMO-1004",
+      "partnerCode": "EMAIL_DEMO",
+      "channel": "email",
+      "type": "status_update",
+      "recipientMasked": "c***@example.test",
+      "templateCode": "BACKGROUND_CHECK_STARTED",
+      "previewPayload": {
+        "subject": "Your background screening is in progress",
+        "applicantName": "Casey Background",
+        "status": "Background Check",
+        "estimatedCompletion": "2026-08-25"
+      },
+      "status": "queued",
+      "createdAt": "2026-08-23T13:31:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1004",
+      "trackingId": "TRK-DEMO-1005",
+      "partnerCode": "DTCC_DEMO",
+      "channel": "email",
+      "type": "status_update",
+      "recipientMasked": "a***@example.test",
+      "templateCode": "APPOINTMENT_PENDING",
+      "previewPayload": {
+        "subject": "Appointment confirmation is pending",
+        "applicantName": "Avery Appointment",
+        "states": [
+          "NJ",
+          "NY"
+        ],
+        "status": "Appointment"
+      },
+      "status": "previewed",
+      "createdAt": "2026-08-22T16:21:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1005",
+      "trackingId": "TRK-DEMO-1006",
+      "partnerCode": "QUILITY",
+      "channel": "email",
+      "type": "agency_review_request",
+      "recipientMasked": "a***@example.test",
+      "templateCode": "AGENCY_REVIEW_REQUEST",
+      "previewPayload": {
+        "subject": "Agency review requested",
+        "applicantName": "Morgan Contracted",
+        "applicationId": "APP-DEMO-1006",
+        "submissionBlocked": true
+      },
+      "status": "queued",
+      "createdAt": "2026-08-12T14:00:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1006",
+      "trackingId": "TRK-DEMO-1006",
+      "partnerCode": "QUILITY",
+      "channel": "in_app",
+      "type": "agency_review_completed",
+      "recipientMasked": "partner:QUILITY",
+      "templateCode": "AGENCY_REVIEW_COMPLETED",
+      "previewPayload": {
+        "title": "Agency review completed",
+        "applicationId": "APP-DEMO-1006",
+        "submissionBlocked": false
+      },
+      "status": "previewed",
+      "createdAt": "2026-08-13T09:30:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1007",
+      "trackingId": "TRK-DEMO-1006",
+      "partnerCode": "QUILITY",
+      "channel": "email",
+      "type": "welcome",
+      "recipientMasked": "m***@example.test",
+      "templateCode": "PRODUCER_WELCOME",
+      "previewPayload": {
+        "subject": "Welcome to Banner",
+        "applicantName": "Morgan Contracted",
+        "contractNumberMasked": "CNT-****-1006",
+        "effectiveDate": "2026-08-15"
+      },
+      "status": "previewed",
+      "createdAt": "2026-08-15T15:05:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1008",
+      "trackingId": "TRK-DEMO-1009",
+      "partnerCode": "SFTP_DEMO",
+      "channel": "email",
+      "type": "exception_notice",
+      "recipientMasked": "p***@example.test",
+      "templateCode": "DUPLICATE_APPLICATION_NOTICE",
+      "previewPayload": {
+        "subject": "Application requires duplicate review",
+        "applicationId": "APP-DEMO-1009",
+        "status": "Action Required",
+        "validationCodes": [
+          "DUPLICATE_APPLICATION_IN_PROGRESS"
+        ]
+      },
+      "status": "previewed",
+      "createdAt": "2026-08-24T09:43:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1009",
+      "trackingId": "TRK-DEMO-1010",
+      "partnerCode": "ETHOS",
+      "channel": "email",
+      "type": "exception_notice",
+      "recipientMasked": "q***@example.test",
+      "templateCode": "MANUAL_EXCEPTION_NOTICE",
+      "previewPayload": {
+        "subject": "Corporate application requires review",
+        "applicationId": "APP-DEMO-1010",
+        "status": "Action Required",
+        "validationCodes": [
+          "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED",
+          "CORPORATE_LICENSED_PRINCIPAL_REQUIRED"
+        ]
+      },
+      "status": "queued",
+      "createdAt": "2026-08-24T10:26:00.000Z"
+    },
+    {
+      "notificationId": "NTF-DEMO-1010",
+      "trackingId": "TRK-DEMO-1007",
+      "partnerCode": "DEMO_PARTNER",
+      "channel": "sms",
+      "type": "status_update",
+      "recipientMasked": "(***) ***-1007",
+      "templateCode": "CONTRACT_TERMINATED",
+      "previewPayload": {
+        "message": "Your synthetic Banner contract termination was completed.",
+        "effectiveDate": "2026-08-18"
+      },
+      "status": "suppressed",
+      "createdAt": "2026-08-18T18:01:00.000Z"
+    }
+  ],
+  "syncAttempts": [
+    {
+      "syncAttemptId": "SYN-DEMO-1001",
+      "trackingId": "TRK-DEMO-1002",
+      "system": "horizon",
+      "operation": "create_digital_record",
+      "status": "success",
+      "correlationId": "corr-demo-1001",
+      "message": "The submitted application was registered in the Horizon routing simulation.",
+      "payloadSummary": {
+        "applicationId": "APP-DEMO-1002",
+        "workflowStage": "APPLICATION_SUBMITTED"
+      },
+      "attemptedAt": "2026-08-24T09:05:10.000Z",
+      "resolvedAt": "2026-08-24T09:05:10.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1002",
+      "trackingId": "TRK-DEMO-1003",
+      "system": "agent_db",
+      "operation": "upsert_pending_agent",
+      "status": "queued",
+      "correlationId": "corr-demo-1002",
+      "message": "Agent DB synchronization is queued until licensing review completes.",
+      "payloadSummary": {
+        "applicationId": "APP-DEMO-1003",
+        "workflowStage": "LICENSING_REVIEW"
+      },
+      "attemptedAt": "2026-08-24T10:10:00.000Z",
+      "resolvedAt": null
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1003",
+      "trackingId": "TRK-DEMO-1004",
+      "system": "horizon",
+      "operation": "update_background_status",
+      "status": "success",
+      "correlationId": "corr-demo-1003",
+      "message": "The pending background status was synchronized to the Horizon simulation.",
+      "payloadSummary": {
+        "providerReferenceId": "BGC-DEMO-1004",
+        "backgroundStatus": "pending"
+      },
+      "attemptedAt": "2026-08-24T11:15:00.000Z",
+      "resolvedAt": "2026-08-24T11:15:00.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1004",
+      "trackingId": "TRK-DEMO-1005",
+      "system": "agent_db",
+      "operation": "upsert_appointment_pending",
+      "status": "success",
+      "correlationId": "corr-demo-1004",
+      "message": "The pending appointment states were saved to the Agent DB simulation.",
+      "payloadSummary": {
+        "states": [
+          "NJ",
+          "NY"
+        ],
+        "appointmentStatus": "pending"
+      },
+      "attemptedAt": "2026-08-22T16:22:00.000Z",
+      "resolvedAt": "2026-08-22T16:22:00.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1005",
+      "trackingId": "TRK-DEMO-1005",
+      "system": "horizon",
+      "operation": "redirect_jit_appointment",
+      "status": "success",
+      "correlationId": "corr-demo-1005",
+      "message": "A matching Horizon event was redirected to the existing digital appointment flow.",
+      "payloadSummary": {
+        "eventId": "HZ-DEMO-1005",
+        "matchedDigitalRecord": true,
+        "duplicatePrevented": true
+      },
+      "attemptedAt": "2026-08-24T11:40:00.000Z",
+      "resolvedAt": "2026-08-24T11:40:00.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1006",
+      "trackingId": "TRK-DEMO-1006",
+      "system": "agent_db",
+      "operation": "activate_agent",
+      "status": "success",
+      "correlationId": "corr-demo-1006",
+      "message": "The contracted producer was activated in the Agent DB simulation.",
+      "payloadSummary": {
+        "contractNumberMasked": "CNT-****-1006",
+        "effectiveDate": "2026-08-15"
+      },
+      "attemptedAt": "2026-08-15T15:00:10.000Z",
+      "resolvedAt": "2026-08-15T15:00:10.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1007",
+      "trackingId": "TRK-DEMO-1006",
+      "system": "lifepro",
+      "operation": "activate_agent",
+      "status": "success",
+      "correlationId": "corr-demo-1007",
+      "message": "The producer contract was activated in the LifePro simulation.",
+      "payloadSummary": {
+        "company": "Banner",
+        "contractStatus": "active",
+        "commissionSchedule": "SENIOR"
+      },
+      "attemptedAt": "2026-08-15T15:00:20.000Z",
+      "resolvedAt": "2026-08-15T15:00:20.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1008",
+      "trackingId": "TRK-DEMO-1006",
+      "system": "horizon",
+      "operation": "close_digital_routing",
+      "status": "success",
+      "correlationId": "corr-demo-1008",
+      "message": "The digital routing record was closed after successful activation.",
+      "payloadSummary": {
+        "workflowStage": "CONTRACTED",
+        "routingStatus": "completed"
+      },
+      "attemptedAt": "2026-08-15T15:00:30.000Z",
+      "resolvedAt": "2026-08-15T15:00:30.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1009",
+      "trackingId": "TRK-DEMO-1007",
+      "system": "agent_db",
+      "operation": "terminate_agent",
+      "status": "success",
+      "correlationId": "corr-demo-1009",
+      "message": "The contract termination was recorded in the Agent DB simulation.",
+      "payloadSummary": {
+        "terminationDate": "2026-08-18",
+        "terminationReason": "PARTNER_REQUEST"
+      },
+      "attemptedAt": "2026-08-18T18:00:10.000Z",
+      "resolvedAt": "2026-08-18T18:00:10.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1010",
+      "trackingId": "TRK-DEMO-1007",
+      "system": "lifepro",
+      "operation": "terminate_contract",
+      "status": "success",
+      "correlationId": "corr-demo-1010",
+      "message": "The contract was terminated in the LifePro simulation.",
+      "payloadSummary": {
+        "contractNumberMasked": "CNT-****-1007",
+        "contractStatus": "terminated"
+      },
+      "attemptedAt": "2026-08-18T18:00:20.000Z",
+      "resolvedAt": "2026-08-18T18:00:20.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1011",
+      "trackingId": "TRK-DEMO-1009",
+      "system": "horizon",
+      "operation": "create_duplicate_exception",
+      "status": "skipped",
+      "correlationId": "corr-demo-1011",
+      "message": "A new routing record was skipped because an active digital application already exists.",
+      "payloadSummary": {
+        "duplicateOfApplicationId": "APP-DEMO-1008",
+        "duplicatePrevented": true
+      },
+      "attemptedAt": "2026-08-24T09:42:10.000Z",
+      "resolvedAt": "2026-08-24T09:42:10.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1012",
+      "trackingId": "TRK-DEMO-1006",
+      "system": "ali",
+      "operation": "activate_agent",
+      "status": "failed",
+      "correlationId": "corr-demo-1012",
+      "message": "The initial ALI activation attempt failed because of a simulated transient mapping error.",
+      "payloadSummary": {
+        "applicationId": "APP-DEMO-1006",
+        "errorCode": "ALI_MAPPING_TEMPORARILY_UNAVAILABLE"
+      },
+      "attemptedAt": "2026-08-15T14:35:00.000Z",
+      "resolvedAt": "2026-08-15T14:35:00.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1013",
+      "trackingId": "TRK-DEMO-1006",
+      "system": "ali",
+      "operation": "activate_agent",
+      "status": "success",
+      "correlationId": "corr-demo-1012",
+      "message": "The ALI activation retry completed successfully.",
+      "payloadSummary": {
+        "applicationId": "APP-DEMO-1006",
+        "retryOfSyncAttemptId": "SYN-DEMO-1012"
+      },
+      "attemptedAt": "2026-08-15T14:50:00.000Z",
+      "resolvedAt": "2026-08-15T14:50:00.000Z"
+    },
+    {
+      "syncAttemptId": "SYN-DEMO-1014",
+      "trackingId": "TRK-DEMO-1010",
+      "system": "lifepro",
+      "operation": "create_agency_contract",
+      "status": "skipped",
+      "correlationId": "corr-demo-1014",
+      "message": "LifePro contract creation was skipped while blocking carrier exceptions remain open.",
+      "payloadSummary": {
+        "applicationId": "APP-DEMO-1010",
+        "validationCodes": [
+          "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED",
+          "CORPORATE_LICENSED_PRINCIPAL_REQUIRED"
+        ]
+      },
+      "attemptedAt": "2026-08-24T10:25:10.000Z",
+      "resolvedAt": "2026-08-24T10:25:10.000Z"
+    }
+  ],
+  "contractChanges": [
+    {
+      "changeRequestId": "CHG-DEMO-1001",
+      "trackingId": "TRK-DEMO-1006",
+      "partnerCode": "QUILITY",
+      "changeType": "commission_schedule",
+      "status": "completed",
+      "manualReviewRequired": false,
+      "createdWorkItemId": null,
+      "requestedBy": "usr_partner_demo",
+      "payload": {
+        "currentValue": "STANDARD",
+        "requestedValue": "SENIOR",
+        "advanceCommissionEligible": false,
+        "reason": "Producer qualified for the synthetic senior schedule."
+      },
+      "outcome": {
+        "result": "updated",
+        "approvedBy": "system",
+        "effectiveDate": "2026-08-15",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-14T10:00:00.000Z",
+      "updatedAt": "2026-08-15T15:00:00.000Z"
+    },
+    {
+      "changeRequestId": "CHG-DEMO-1002",
+      "trackingId": "TRK-DEMO-1006",
+      "partnerCode": "QUILITY",
+      "changeType": "hierarchy",
+      "status": "manual_routed",
+      "manualReviewRequired": true,
+      "createdWorkItemId": "WI-DEMO-1010",
+      "requestedBy": "usr_distribution_demo",
+      "payload": {
+        "currentValue": "NATIONAL_DEMO",
+        "requestedValue": "REGIONAL_DEMO",
+        "bulkAffectedCount": 4,
+        "reason": "Move a synthetic producer group to a regional hierarchy."
+      },
+      "outcome": {
+        "result": "pending_manual_review",
+        "targetGroup": "distribution",
+        "validationCodes": [
+          "COMPLEX_HIERARCHY_CHANGE_REQUIRES_REVIEW"
+        ]
+      },
+      "createdAt": "2026-08-24T09:00:00.000Z",
+      "updatedAt": "2026-08-24T09:00:00.000Z"
+    },
+    {
+      "changeRequestId": "CHG-DEMO-1003",
+      "trackingId": "TRK-DEMO-1003",
+      "partnerCode": "ETHOS",
+      "changeType": "assignee",
+      "status": "approved",
+      "manualReviewRequired": false,
+      "createdWorkItemId": null,
+      "requestedBy": "usr_manager_demo",
+      "payload": {
+        "currentValue": null,
+        "requestedValue": "usr_licensing_demo",
+        "reason": "Assign the application to the licensing review queue."
+      },
+      "outcome": {
+        "result": "updated",
+        "approvedBy": "usr_manager_demo",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-23T09:10:00.000Z",
+      "updatedAt": "2026-08-23T09:15:00.000Z"
+    },
+    {
+      "changeRequestId": "CHG-DEMO-1004",
+      "trackingId": "TRK-DEMO-1010",
+      "partnerCode": "ETHOS",
+      "changeType": "level",
+      "status": "under_review",
+      "manualReviewRequired": true,
+      "createdWorkItemId": "WI-DEMO-1005",
+      "requestedBy": "usr_manager_demo",
+      "payload": {
+        "currentValue": "AGENCY",
+        "requestedValue": "GENERAL_AGENCY",
+        "company": "WilliamPenn",
+        "reason": "Evaluate an alternate level while resolving carrier restrictions."
+      },
+      "outcome": {
+        "result": "review_required",
+        "targetGroup": "manager",
+        "validationCodes": [
+          "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED",
+          "CORPORATE_LICENSED_PRINCIPAL_REQUIRED"
+        ]
+      },
+      "createdAt": "2026-08-24T10:25:00.000Z",
+      "updatedAt": "2026-08-24T10:25:00.000Z"
+    },
+    {
+      "changeRequestId": "CHG-DEMO-1005",
+      "trackingId": "TRK-DEMO-1007",
+      "partnerCode": "DEMO_PARTNER",
+      "changeType": "assignee",
+      "status": "completed",
+      "manualReviewRequired": false,
+      "createdWorkItemId": null,
+      "requestedBy": "usr_operations_demo",
+      "payload": {
+        "currentValue": "usr_operations_demo",
+        "requestedValue": null,
+        "reason": "Release assignment after contract termination completed."
+      },
+      "outcome": {
+        "result": "assignment_released",
+        "approvedBy": "system",
+        "validationCodes": []
+      },
+      "createdAt": "2026-08-18T18:00:00.000Z",
+      "updatedAt": "2026-08-18T18:01:00.000Z"
+    },
+    {
+      "changeRequestId": "CHG-DEMO-1006",
+      "trackingId": "TRK-DEMO-1005",
+      "partnerCode": "DTCC_DEMO",
+      "changeType": "commission_schedule",
+      "status": "rejected",
+      "manualReviewRequired": false,
+      "createdWorkItemId": null,
+      "requestedBy": "usr_agency_demo",
+      "payload": {
+        "currentValue": "STANDARD",
+        "requestedValue": "ABNCA",
+        "advanceCommissionEligible": true,
+        "reason": "Synthetic request used to demonstrate commission validation."
+      },
+      "outcome": {
+        "result": "rejected",
+        "approvedBy": "system",
+        "validationCodes": [
+          "ABNCA_NO_ADVANCE"
+        ]
+      },
+      "createdAt": "2026-08-24T11:00:00.000Z",
+      "updatedAt": "2026-08-24T11:00:00.000Z"
+    }
+  ]
+}

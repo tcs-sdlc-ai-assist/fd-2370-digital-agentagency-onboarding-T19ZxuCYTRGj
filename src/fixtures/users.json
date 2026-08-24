@@ -1,0 +1,65 @@
+[
+  {
+    "id": "usr_partner_demo",
+    "email": "partner.demo@example.test",
+    "firstName": "Parker",
+    "lastName": "Partner",
+    "role": "partner",
+    "organization": "Demo Partner Network",
+    "status": "active"
+  },
+  {
+    "id": "usr_agency_demo",
+    "email": "agency.demo@example.test",
+    "firstName": "Avery",
+    "lastName": "Agency",
+    "role": "agency",
+    "organization": "Demo Insurance Agency",
+    "status": "active"
+  },
+  {
+    "id": "usr_licensing_demo",
+    "email": "licensing.demo@example.test",
+    "firstName": "Logan",
+    "lastName": "Licensing",
+    "role": "licensing",
+    "organization": "Demo Licensing Services",
+    "status": "active"
+  },
+  {
+    "id": "usr_manager_demo",
+    "email": "manager.demo@example.test",
+    "firstName": "Morgan",
+    "lastName": "Manager",
+    "role": "manager",
+    "organization": "Demo Regional Management",
+    "status": "active"
+  },
+  {
+    "id": "usr_distribution_demo",
+    "email": "distribution.demo@example.test",
+    "firstName": "Drew",
+    "lastName": "Distribution",
+    "role": "distribution",
+    "organization": "Demo Distribution Group",
+    "status": "active"
+  },
+  {
+    "id": "usr_operations_demo",
+    "email": "operations.demo@example.test",
+    "firstName": "Olivia",
+    "lastName": "Operations",
+    "role": "operations",
+    "organization": "Demo Operations Center",
+    "status": "active"
+  },
+  {
+    "id": "usr_admin_demo",
+    "email": "admin.demo@example.test",
+    "firstName": "Alex",
+    "lastName": "Administrator",
+    "role": "admin",
+    "organization": "Digital Onboarding Administration",
+    "status": "active"
+  }
+]

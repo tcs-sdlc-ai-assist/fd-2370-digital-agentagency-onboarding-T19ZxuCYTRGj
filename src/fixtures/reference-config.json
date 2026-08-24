@@ -1,0 +1,410 @@
+{
+  "carriers": [
+    {
+      "id": "carrier_banner",
+      "code": "BANNER",
+      "name": "Banner Life Insurance Company",
+      "status": "active"
+    },
+    {
+      "id": "carrier_william_penn",
+      "code": "WILLIAM_PENN",
+      "name": "William Penn Life Insurance Company of New York",
+      "status": "active"
+    }
+  ],
+  "generalAgencies": [
+    {
+      "id": "ga_national_demo",
+      "code": "NATIONAL_DEMO",
+      "name": "National Demo General Agency",
+      "type": "national",
+      "status": "active"
+    },
+    {
+      "id": "ga_regional_demo",
+      "code": "REGIONAL_DEMO",
+      "name": "Regional Demo General Agency",
+      "type": "regional",
+      "status": "active"
+    },
+    {
+      "id": "ga_independent_demo",
+      "code": "INDEPENDENT_DEMO",
+      "name": "Independent Demo General Agency",
+      "type": "independent",
+      "status": "active"
+    }
+  ],
+  "agencyTypes": [
+    {
+      "id": "agency_type_bga",
+      "code": "BGA",
+      "name": "Brokerage General Agency",
+      "description": "An agency that supports independent insurance producers.",
+      "status": "active"
+    },
+    {
+      "id": "agency_type_imo",
+      "code": "IMO",
+      "name": "Independent Marketing Organization",
+      "description": "An organization that recruits and supports agencies and producers.",
+      "status": "active"
+    },
+    {
+      "id": "agency_type_imo_bga",
+      "code": "IMO_BGA",
+      "name": "IMO and BGA",
+      "description": "An organization operating as both an IMO and a BGA.",
+      "status": "active"
+    },
+    {
+      "id": "agency_type_direct",
+      "code": "DIRECT",
+      "name": "Direct Agency",
+      "description": "An agency contracted directly with the carrier.",
+      "status": "active"
+    }
+  ],
+  "contracts": [
+    {
+      "id": "contract_producer",
+      "code": "PRODUCER",
+      "name": "Producer Contract",
+      "description": "Standard contract for an individual producer.",
+      "requiresLicense": true,
+      "requiresBackgroundCheck": true,
+      "status": "active"
+    },
+    {
+      "id": "contract_agency",
+      "code": "AGENCY",
+      "name": "Agency Contract",
+      "description": "Standard contract for an agency entity.",
+      "requiresLicense": true,
+      "requiresBackgroundCheck": false,
+      "status": "active"
+    },
+    {
+      "id": "contract_solicitor",
+      "code": "SOLICITOR",
+      "name": "Solicitor Contract",
+      "description": "Contract for a solicitor operating under a supervising agency.",
+      "requiresLicense": true,
+      "requiresBackgroundCheck": true,
+      "status": "active"
+    },
+    {
+      "id": "contract_referral",
+      "code": "REFERRAL",
+      "name": "Referral Contract",
+      "description": "Limited contract for approved referral activity.",
+      "requiresLicense": false,
+      "requiresBackgroundCheck": false,
+      "status": "active"
+    }
+  ],
+  "levels": [
+    {
+      "id": "level_producer",
+      "code": "PRODUCER",
+      "name": "Producer",
+      "rank": 10,
+      "status": "active"
+    },
+    {
+      "id": "level_senior_producer",
+      "code": "SENIOR_PRODUCER",
+      "name": "Senior Producer",
+      "rank": 20,
+      "status": "active"
+    },
+    {
+      "id": "level_agency",
+      "code": "AGENCY",
+      "name": "Agency",
+      "rank": 30,
+      "status": "active"
+    },
+    {
+      "id": "level_general_agency",
+      "code": "GENERAL_AGENCY",
+      "name": "General Agency",
+      "rank": 40,
+      "status": "active"
+    },
+    {
+      "id": "level_master_general_agency",
+      "code": "MASTER_GENERAL_AGENCY",
+      "name": "Master General Agency",
+      "rank": 50,
+      "status": "active"
+    }
+  ],
+  "schedules": [
+    {
+      "id": "schedule_standard",
+      "code": "STANDARD",
+      "name": "Standard Commission Schedule",
+      "description": "Default commission schedule for newly contracted producers.",
+      "levelId": "level_producer",
+      "effectiveDate": "2025-01-01",
+      "expirationDate": null,
+      "status": "active"
+    },
+    {
+      "id": "schedule_senior",
+      "code": "SENIOR",
+      "name": "Senior Producer Commission Schedule",
+      "description": "Commission schedule for qualified senior producers.",
+      "levelId": "level_senior_producer",
+      "effectiveDate": "2025-01-01",
+      "expirationDate": null,
+      "status": "active"
+    },
+    {
+      "id": "schedule_agency",
+      "code": "AGENCY",
+      "name": "Agency Commission Schedule",
+      "description": "Commission schedule for contracted agencies.",
+      "levelId": "level_agency",
+      "effectiveDate": "2025-01-01",
+      "expirationDate": null,
+      "status": "active"
+    },
+    {
+      "id": "schedule_general_agency",
+      "code": "GENERAL_AGENCY",
+      "name": "General Agency Commission Schedule",
+      "description": "Commission schedule for contracted general agencies.",
+      "levelId": "level_general_agency",
+      "effectiveDate": "2025-01-01",
+      "expirationDate": null,
+      "status": "active"
+    }
+  ],
+  "providers": [
+    {
+      "id": "provider_nipr",
+      "code": "NIPR",
+      "name": "National Insurance Producer Registry",
+      "services": [
+        "licenseVerification",
+        "appointmentVerification"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "provider_finra",
+      "code": "FINRA",
+      "name": "Financial Industry Regulatory Authority",
+      "services": [
+        "registrationVerification"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "provider_background_demo",
+      "code": "BACKGROUND_DEMO",
+      "name": "Demo Background Screening Provider",
+      "services": [
+        "backgroundCheck"
+      ],
+      "status": "active"
+    },
+    {
+      "id": "provider_e_signature_demo",
+      "code": "E_SIGNATURE_DEMO",
+      "name": "Demo Electronic Signature Provider",
+      "services": [
+        "electronicSignature"
+      ],
+      "status": "active"
+    }
+  ],
+  "roles": [
+    {
+      "id": "role_partner",
+      "code": "partner",
+      "name": "Partner",
+      "description": "Creates and monitors onboarding requests for partner organizations.",
+      "status": "active"
+    },
+    {
+      "id": "role_agency",
+      "code": "agency",
+      "name": "Agency",
+      "description": "Manages onboarding requests and producers for an agency.",
+      "status": "active"
+    },
+    {
+      "id": "role_licensing",
+      "code": "licensing",
+      "name": "Licensing",
+      "description": "Reviews producer licenses and appointment requirements.",
+      "status": "active"
+    },
+    {
+      "id": "role_manager",
+      "code": "manager",
+      "name": "Manager",
+      "description": "Reviews work queues and approves escalated onboarding requests.",
+      "status": "active"
+    },
+    {
+      "id": "role_distribution",
+      "code": "distribution",
+      "name": "Distribution",
+      "description": "Manages distribution relationships and contracting hierarchies.",
+      "status": "active"
+    },
+    {
+      "id": "role_operations",
+      "code": "operations",
+      "name": "Operations",
+      "description": "Processes onboarding requests and resolves operational exceptions.",
+      "status": "active"
+    },
+    {
+      "id": "role_admin",
+      "code": "admin",
+      "name": "Administrator",
+      "description": "Manages application configuration, access, and reference data.",
+      "status": "active"
+    }
+  ],
+  "statuses": {
+    "users": [
+      {
+        "code": "invited",
+        "name": "Invited"
+      },
+      {
+        "code": "active",
+        "name": "Active"
+      },
+      {
+        "code": "inactive",
+        "name": "Inactive"
+      },
+      {
+        "code": "suspended",
+        "name": "Suspended"
+      }
+    ],
+    "onboarding": [
+      {
+        "code": "draft",
+        "name": "Draft"
+      },
+      {
+        "code": "submitted",
+        "name": "Submitted"
+      },
+      {
+        "code": "in_review",
+        "name": "In Review"
+      },
+      {
+        "code": "action_required",
+        "name": "Action Required"
+      },
+      {
+        "code": "approved",
+        "name": "Approved"
+      },
+      {
+        "code": "declined",
+        "name": "Declined"
+      },
+      {
+        "code": "withdrawn",
+        "name": "Withdrawn"
+      },
+      {
+        "code": "completed",
+        "name": "Completed"
+      }
+    ],
+    "contracts": [
+      {
+        "code": "pending",
+        "name": "Pending"
+      },
+      {
+        "code": "active",
+        "name": "Active"
+      },
+      {
+        "code": "inactive",
+        "name": "Inactive"
+      },
+      {
+        "code": "terminated",
+        "name": "Terminated"
+      },
+      {
+        "code": "expired",
+        "name": "Expired"
+      }
+    ],
+    "documents": [
+      {
+        "code": "not_started",
+        "name": "Not Started"
+      },
+      {
+        "code": "pending",
+        "name": "Pending"
+      },
+      {
+        "code": "received",
+        "name": "Received"
+      },
+      {
+        "code": "accepted",
+        "name": "Accepted"
+      },
+      {
+        "code": "rejected",
+        "name": "Rejected"
+      }
+    ]
+  },
+  "notificationDefaults": {
+    "email": {
+      "enabled": true,
+      "applicationSubmitted": true,
+      "statusChanged": true,
+      "actionRequired": true,
+      "applicationApproved": true,
+      "applicationDeclined": true,
+      "documentRequested": true,
+      "assignmentChanged": true,
+      "dailyDigest": false
+    },
+    "inApp": {
+      "enabled": true,
+      "applicationSubmitted": true,
+      "statusChanged": true,
+      "actionRequired": true,
+      "applicationApproved": true,
+      "applicationDeclined": true,
+      "documentRequested": true,
+      "assignmentChanged": true
+    },
+    "sms": {
+      "enabled": false,
+      "statusChanged": false,
+      "actionRequired": false,
+      "applicationApproved": false
+    },
+    "digestFrequency": "daily",
+    "quietHours": {
+      "enabled": false,
+      "start": "20:00",
+      "end": "08:00",
+      "timeZone": "America/New_York"
+    }
+  }
+}

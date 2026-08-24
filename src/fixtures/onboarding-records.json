@@ -1,0 +1,867 @@
+{
+  "schemaVersion": 1,
+  "fixtureVersion": "2026.08.24",
+  "description": "Canonical synthetic onboarding applications spanning draft, submitted, review, background, appointment, contracted, terminated, duplicate, and exception scenarios. All people, organizations, identifiers, and contact details are fictitious.",
+  "records": [
+    {
+      "id": "app_demo_draft_1001",
+      "applicationId": "APP-DEMO-1001",
+      "trackingId": "TRK-DEMO-1001",
+      "scenario": "draft",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "draft",
+      "workflowStage": "APPLICATION_STARTED",
+      "priority": "normal",
+      "sourceChannel": "PARTNER_DASHBOARD",
+      "sourceFormat": "MANUAL_FORM",
+      "partnerCode": "DEMO_PARTNER",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "NATIONAL_DEMO",
+      "agency": {
+        "name": "Demo Partner Network",
+        "type": "BGA"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Harper",
+        "middleName": null,
+        "lastName": "Draft",
+        "email": "harper.draft@example.test",
+        "phone": "2025551001",
+        "npn": "8101001",
+        "residenceState": "MI"
+      },
+      "licensing": {
+        "residentState": "MI",
+        "licenseNumber": null,
+        "linesOfAuthority": []
+      },
+      "background": {
+        "required": true,
+        "status": "not_started",
+        "providerCode": "BACKGROUND_DEMO",
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": []
+      },
+      "documents": {
+        "status": "not_started",
+        "required": 4,
+        "received": 0,
+        "accepted": 0
+      },
+      "progress": {
+        "percentComplete": 35,
+        "currentStep": "licensing",
+        "missingFields": [
+          "licensing.licenseNumber",
+          "licensing.linesOfAuthority",
+          "banking",
+          "attestations"
+        ]
+      },
+      "assignment": {
+        "team": null,
+        "assigneeUserId": null
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": null,
+      "completedAt": null,
+      "createdAt": "2026-08-24T08:10:00.000Z",
+      "updatedAt": "2026-08-24T08:35:00.000Z"
+    },
+    {
+      "id": "app_demo_submitted_1002",
+      "applicationId": "APP-DEMO-1002",
+      "trackingId": "TRK-DEMO-1002",
+      "scenario": "submitted",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "submitted",
+      "workflowStage": "APPLICATION_SUBMITTED",
+      "priority": "normal",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "QUILITY_JSON",
+      "partnerCode": "QUILITY",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "NATIONAL_DEMO",
+      "agency": {
+        "name": "Synthetic Summit Brokerage",
+        "type": "BGA"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Jordan",
+        "middleName": "R",
+        "lastName": "Submitted",
+        "email": "jordan.submitted@example.test",
+        "phone": "2025551002",
+        "npn": "8101002",
+        "residenceState": "TX"
+      },
+      "licensing": {
+        "residentState": "TX",
+        "licenseNumber": "TX-DEMO-8101002",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "not_started",
+        "providerCode": "BACKGROUND_DEMO",
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": [
+          "TX"
+        ]
+      },
+      "documents": {
+        "status": "received",
+        "required": 4,
+        "received": 4,
+        "accepted": 0
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "submission",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "operations",
+        "assigneeUserId": null
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-24T09:05:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-24T09:03:00.000Z",
+      "updatedAt": "2026-08-24T09:05:00.000Z"
+    },
+    {
+      "id": "app_demo_review_1003",
+      "applicationId": "APP-DEMO-1003",
+      "trackingId": "TRK-DEMO-1003",
+      "scenario": "licensing_review",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "in_review",
+      "workflowStage": "LICENSING_REVIEW",
+      "priority": "high",
+      "sourceChannel": "API",
+      "sourceFormat": "ETHOS_XML",
+      "partnerCode": "ETHOS",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "REGIONAL_DEMO",
+      "agency": {
+        "name": "Regional Example Insurance",
+        "type": "IMO"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "SENIOR_PRODUCER",
+        "commissionSchedule": "SENIOR",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Riley",
+        "middleName": null,
+        "lastName": "Review",
+        "email": "riley.review@example.test",
+        "phone": "2025551003",
+        "npn": "8101003",
+        "residenceState": "PA"
+      },
+      "licensing": {
+        "residentState": "PA",
+        "licenseNumber": "PA-DEMO-8101003",
+        "linesOfAuthority": [
+          "LIFE",
+          "ACCIDENT_HEALTH"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "not_started",
+        "providerCode": "BACKGROUND_DEMO",
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": [
+          "PA",
+          "OH"
+        ]
+      },
+      "documents": {
+        "status": "accepted",
+        "required": 4,
+        "received": 4,
+        "accepted": 4
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "licensing_review",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "licensing",
+        "assigneeUserId": "usr_licensing_demo"
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-22T14:20:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-22T14:15:00.000Z",
+      "updatedAt": "2026-08-24T10:10:00.000Z"
+    },
+    {
+      "id": "app_demo_background_1004",
+      "applicationId": "APP-DEMO-1004",
+      "trackingId": "TRK-DEMO-1004",
+      "scenario": "background_in_progress",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "in_review",
+      "workflowStage": "BACKGROUND_CHECK",
+      "priority": "normal",
+      "sourceChannel": "EMAIL",
+      "sourceFormat": "QUILITY_JSON",
+      "partnerCode": "EMAIL_DEMO",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "INDEPENDENT_DEMO",
+      "agency": {
+        "name": "Synthetic Harbor Agency",
+        "type": "DIRECT"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Casey",
+        "middleName": "L",
+        "lastName": "Background",
+        "email": "casey.background@example.test",
+        "phone": "2025551004",
+        "npn": "8101004",
+        "residenceState": "VA"
+      },
+      "licensing": {
+        "residentState": "VA",
+        "licenseNumber": "VA-DEMO-8101004",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "pending",
+        "providerCode": "BACKGROUND_DEMO",
+        "referenceId": "BGC-DEMO-1004",
+        "initiatedAt": "2026-08-23T13:30:00.000Z",
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": [
+          "VA"
+        ]
+      },
+      "documents": {
+        "status": "accepted",
+        "required": 4,
+        "received": 4,
+        "accepted": 4
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "background_check",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "operations",
+        "assigneeUserId": "usr_operations_demo"
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-21T11:45:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-21T11:40:00.000Z",
+      "updatedAt": "2026-08-24T11:15:00.000Z"
+    },
+    {
+      "id": "app_demo_appointment_1005",
+      "applicationId": "APP-DEMO-1005",
+      "trackingId": "TRK-DEMO-1005",
+      "scenario": "appointment_pending",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "approved",
+      "workflowStage": "APPOINTMENT_PENDING",
+      "priority": "normal",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "DTCC_FLAT_FILE",
+      "partnerCode": "DTCC_DEMO",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "NATIONAL_DEMO",
+      "agency": {
+        "name": "Demo Financial Network",
+        "type": "IMO_BGA"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Avery",
+        "middleName": null,
+        "lastName": "Appointment",
+        "email": "avery.appointment@example.test",
+        "phone": "2025551005",
+        "npn": "8101005",
+        "residenceState": "NJ",
+        "crd": "710005"
+      },
+      "licensing": {
+        "residentState": "NJ",
+        "licenseNumber": "NJ-DEMO-8101005",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": false,
+        "status": "accepted",
+        "reason": "REGISTERED_REP_EXEMPT",
+        "providerCode": null,
+        "completedAt": "2026-08-20T15:00:00.000Z"
+      },
+      "appointment": {
+        "required": true,
+        "status": "pending",
+        "providerCode": "NIPR",
+        "referenceId": "APT-DEMO-1005",
+        "states": [
+          "NJ",
+          "NY"
+        ],
+        "submittedAt": "2026-08-22T16:20:00.000Z",
+        "completedAt": null
+      },
+      "documents": {
+        "status": "accepted",
+        "required": 3,
+        "received": 3,
+        "accepted": 3
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "appointment",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "licensing",
+        "assigneeUserId": "usr_licensing_demo"
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-19T12:10:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-19T12:05:00.000Z",
+      "updatedAt": "2026-08-24T12:05:00.000Z"
+    },
+    {
+      "id": "app_demo_contracted_1006",
+      "applicationId": "APP-DEMO-1006",
+      "trackingId": "TRK-DEMO-1006",
+      "scenario": "contracted",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "completed",
+      "workflowStage": "CONTRACTED",
+      "priority": "normal",
+      "sourceChannel": "API",
+      "sourceFormat": "QUILITY_JSON",
+      "partnerCode": "QUILITY",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "NATIONAL_DEMO",
+      "agency": {
+        "name": "Completed Demo Brokerage",
+        "type": "BGA"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "SENIOR_PRODUCER",
+        "commissionSchedule": "SENIOR",
+        "advanceCommission": false,
+        "status": "active",
+        "contractNumber": "CNT-DEMO-1006",
+        "effectiveDate": "2026-08-15",
+        "terminationDate": null
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Morgan",
+        "middleName": "J",
+        "lastName": "Contracted",
+        "email": "morgan.contracted@example.test",
+        "phone": "2025551006",
+        "npn": "8101006",
+        "residenceState": "OH"
+      },
+      "licensing": {
+        "residentState": "OH",
+        "licenseNumber": "OH-DEMO-8101006",
+        "linesOfAuthority": [
+          "LIFE",
+          "ACCIDENT_HEALTH"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "accepted",
+        "providerCode": "BACKGROUND_DEMO",
+        "referenceId": "BGC-DEMO-1006",
+        "completedAt": "2026-08-13T17:10:00.000Z"
+      },
+      "appointment": {
+        "required": true,
+        "status": "accepted",
+        "providerCode": "NIPR",
+        "referenceId": "APT-DEMO-1006",
+        "states": [
+          "OH",
+          "IN"
+        ],
+        "submittedAt": "2026-08-14T09:00:00.000Z",
+        "completedAt": "2026-08-15T14:30:00.000Z"
+      },
+      "documents": {
+        "status": "accepted",
+        "required": 4,
+        "received": 4,
+        "accepted": 4
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "completed",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "operations",
+        "assigneeUserId": "usr_operations_demo"
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-11T10:25:00.000Z",
+      "completedAt": "2026-08-15T15:00:00.000Z",
+      "createdAt": "2026-08-11T10:20:00.000Z",
+      "updatedAt": "2026-08-15T15:00:00.000Z"
+    },
+    {
+      "id": "app_demo_terminated_1007",
+      "applicationId": "APP-DEMO-1007",
+      "trackingId": "TRK-DEMO-1007",
+      "scenario": "terminated_contract",
+      "journeyType": "agent_contracting",
+      "requestType": "termination",
+      "status": "completed",
+      "workflowStage": "TERMINATED",
+      "priority": "normal",
+      "sourceChannel": "MANUAL",
+      "sourceFormat": "CHANGE_REQUEST",
+      "partnerCode": "DEMO_PARTNER",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "REGIONAL_DEMO",
+      "agency": {
+        "name": "Former Demo Producers",
+        "type": "DIRECT"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "terminated",
+        "contractNumber": "CNT-DEMO-1007",
+        "effectiveDate": "2025-03-01",
+        "terminationDate": "2026-08-18",
+        "terminationReason": "PARTNER_REQUEST"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Taylor",
+        "middleName": null,
+        "lastName": "Terminated",
+        "email": "taylor.terminated@example.test",
+        "phone": "2025551007",
+        "npn": "8101007",
+        "residenceState": "FL"
+      },
+      "licensing": {
+        "residentState": "FL",
+        "licenseNumber": "FL-DEMO-8101007",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "accepted",
+        "providerCode": "BACKGROUND_DEMO",
+        "referenceId": "BGC-DEMO-1007",
+        "completedAt": "2025-02-25T16:00:00.000Z"
+      },
+      "appointment": {
+        "required": true,
+        "status": "terminated",
+        "providerCode": "NIPR",
+        "referenceId": "APT-DEMO-1007",
+        "states": [
+          "FL"
+        ],
+        "submittedAt": "2025-02-26T10:00:00.000Z",
+        "completedAt": "2026-08-18T18:00:00.000Z"
+      },
+      "documents": {
+        "status": "accepted",
+        "required": 1,
+        "received": 1,
+        "accepted": 1
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "terminated",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "operations",
+        "assigneeUserId": "usr_operations_demo"
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-18T12:00:00.000Z",
+      "completedAt": "2026-08-18T18:00:00.000Z",
+      "createdAt": "2026-08-18T11:55:00.000Z",
+      "updatedAt": "2026-08-18T18:00:00.000Z"
+    },
+    {
+      "id": "app_demo_duplicate_source_1008",
+      "applicationId": "APP-DEMO-1008",
+      "trackingId": "TRK-DEMO-1008",
+      "scenario": "duplicate_source",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "in_review",
+      "workflowStage": "APPLICATION_STARTED",
+      "priority": "normal",
+      "sourceChannel": "PARTNER_DASHBOARD",
+      "sourceFormat": "MANUAL_FORM",
+      "partnerCode": "DEMO_PARTNER",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "NATIONAL_DEMO",
+      "agency": {
+        "name": "Duplicate Demo Agency",
+        "type": "BGA"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Parker",
+        "middleName": null,
+        "lastName": "Duplicate",
+        "email": "parker.duplicate@example.test",
+        "phone": "2025551008",
+        "npn": "8101008",
+        "residenceState": "CO"
+      },
+      "licensing": {
+        "residentState": "CO",
+        "licenseNumber": "CO-DEMO-8101008",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "not_started",
+        "providerCode": "BACKGROUND_DEMO",
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": [
+          "CO"
+        ]
+      },
+      "documents": {
+        "status": "received",
+        "required": 4,
+        "received": 4,
+        "accepted": 2
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "duplicate_review",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "operations",
+        "assigneeUserId": "usr_operations_demo"
+      },
+      "exceptions": [],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-23T08:40:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-23T08:30:00.000Z",
+      "updatedAt": "2026-08-24T08:00:00.000Z"
+    },
+    {
+      "id": "app_demo_duplicate_1009",
+      "applicationId": "APP-DEMO-1009",
+      "trackingId": "TRK-DEMO-1009",
+      "scenario": "duplicate_detected",
+      "journeyType": "agent_contracting",
+      "requestType": "new_onboarding",
+      "status": "action_required",
+      "workflowStage": "DUPLICATE_REVIEW",
+      "priority": "high",
+      "sourceChannel": "SFTP",
+      "sourceFormat": "QUILITY_JSON",
+      "partnerCode": "SFTP_DEMO",
+      "company": "Banner",
+      "carrierCode": "BANNER",
+      "gaCode": "NATIONAL_DEMO",
+      "agency": {
+        "name": "Duplicate Demo Agency",
+        "type": "BGA"
+      },
+      "contract": {
+        "type": "PRODUCER",
+        "level": "PRODUCER",
+        "commissionSchedule": "STANDARD",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "individual",
+        "firstName": "Parker",
+        "middleName": null,
+        "lastName": "Duplicate",
+        "email": "parker.duplicate@example.test",
+        "phone": "2025551008",
+        "npn": "8101008",
+        "residenceState": "CO"
+      },
+      "licensing": {
+        "residentState": "CO",
+        "licenseNumber": "CO-DEMO-8101008",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": true,
+        "status": "not_started",
+        "providerCode": "BACKGROUND_DEMO",
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": [
+          "CO"
+        ]
+      },
+      "documents": {
+        "status": "received",
+        "required": 4,
+        "received": 4,
+        "accepted": 0
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "duplicate_review",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "operations",
+        "assigneeUserId": "usr_operations_demo"
+      },
+      "exceptions": [
+        {
+          "code": "DUPLICATE_APPLICATION_IN_PROGRESS",
+          "category": "duplicate",
+          "severity": "blocking",
+          "status": "open",
+          "message": "An onboarding application for this NPN and carrier is already in progress.",
+          "createdAt": "2026-08-24T09:42:00.000Z",
+          "resolvedAt": null
+        }
+      ],
+      "duplicateOfApplicationId": "APP-DEMO-1008",
+      "submittedAt": "2026-08-24T09:40:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-24T09:39:00.000Z",
+      "updatedAt": "2026-08-24T09:42:00.000Z"
+    },
+    {
+      "id": "app_demo_exception_1010",
+      "applicationId": "APP-DEMO-1010",
+      "trackingId": "TRK-DEMO-1010",
+      "scenario": "carrier_rule_exception",
+      "journeyType": "corporate",
+      "requestType": "new_onboarding",
+      "status": "action_required",
+      "workflowStage": "MANUAL_EXCEPTION",
+      "priority": "high",
+      "sourceChannel": "API",
+      "sourceFormat": "ETHOS_XML",
+      "partnerCode": "ETHOS",
+      "company": "WilliamPenn",
+      "carrierCode": "WILLIAM_PENN",
+      "gaCode": "REGIONAL_DEMO",
+      "agency": {
+        "name": "Synthetic Empire Financial LLC",
+        "type": "IMO"
+      },
+      "contract": {
+        "type": "AGENCY",
+        "level": "AGENCY",
+        "commissionSchedule": "AGENCY",
+        "advanceCommission": false,
+        "status": "pending"
+      },
+      "applicant": {
+        "type": "organization",
+        "legalName": "Synthetic Empire Financial LLC",
+        "contactFirstName": "Quinn",
+        "contactLastName": "Exception",
+        "email": "quinn.exception@example.test",
+        "phone": "2025551010",
+        "stateOfFormation": "NY",
+        "taxIdLast4": "1010"
+      },
+      "principals": [
+        {
+          "firstName": "Robin",
+          "lastName": "Principal",
+          "email": "robin.principal1010@example.test",
+          "ownershipPercent": 100,
+          "npn": null,
+          "isLicensedEligible": false
+        }
+      ],
+      "licensing": {
+        "residentState": "NY",
+        "licenseNumber": "NY-DEMO-AGY-1010",
+        "linesOfAuthority": [
+          "LIFE"
+        ]
+      },
+      "background": {
+        "required": false,
+        "status": "not_started",
+        "providerCode": null,
+        "completedAt": null
+      },
+      "appointment": {
+        "required": true,
+        "status": "not_started",
+        "states": [
+          "NY"
+        ]
+      },
+      "documents": {
+        "status": "received",
+        "required": 5,
+        "received": 5,
+        "accepted": 3
+      },
+      "progress": {
+        "percentComplete": 100,
+        "currentStep": "exception_review",
+        "missingFields": []
+      },
+      "assignment": {
+        "team": "manager",
+        "assigneeUserId": "usr_manager_demo"
+      },
+      "exceptions": [
+        {
+          "code": "WILLIAM_PENN_NON_TRADITIONAL_UNSUPPORTED",
+          "category": "carrier_rule",
+          "severity": "blocking",
+          "status": "open",
+          "message": "William Penn does not support the selected non-traditional agency arrangement.",
+          "createdAt": "2026-08-24T10:25:00.000Z",
+          "resolvedAt": null
+        },
+        {
+          "code": "CORPORATE_LICENSED_PRINCIPAL_REQUIRED",
+          "category": "eligibility",
+          "severity": "blocking",
+          "status": "open",
+          "message": "A corporate contract requires at least one licensed and eligible principal.",
+          "createdAt": "2026-08-24T10:25:00.000Z",
+          "resolvedAt": null
+        }
+      ],
+      "duplicateOfApplicationId": null,
+      "submittedAt": "2026-08-24T10:20:00.000Z",
+      "completedAt": null,
+      "createdAt": "2026-08-24T10:18:00.000Z",
+      "updatedAt": "2026-08-24T10:25:00.000Z"
+    }
+  ]
+}
