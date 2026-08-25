@@ -135,6 +135,7 @@ export const documentPackageSchema = z
     completedAt: nullableDateTimeSchema.optional(),
     metadata: metadataSchema.default({}),
   })
+  .passthrough()
   .superRefine((documentPackage, context) => {
     if (
       documentPackage.packageComplete &&
@@ -158,8 +159,7 @@ export const documentPackageSchema = z
         path: ['status'],
       });
     }
-  })
-  .passthrough();
+  });
 
 export const documentPackageRepositoryStateSchema = z
   .object({

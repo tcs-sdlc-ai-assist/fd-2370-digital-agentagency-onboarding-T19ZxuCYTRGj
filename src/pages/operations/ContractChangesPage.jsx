@@ -183,7 +183,7 @@ function getApplicantName(application) {
     .join(' ')
     .trim();
 
-  return applicant.legalName ?? applicant.name ?? name || 'Applicant';
+  return applicant.legalName ?? applicant.name ?? (name || 'Applicant');
 }
 
 function getCurrentChangeValue(application, changeType) {

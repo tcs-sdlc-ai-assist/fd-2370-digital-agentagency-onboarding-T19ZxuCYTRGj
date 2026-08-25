@@ -173,11 +173,11 @@ export const documentSummarySchema = z
     received: z.number().int().nonnegative(),
     accepted: z.number().int().nonnegative(),
   })
+  .passthrough()
   .refine(
     ({ accepted, received }) => accepted <= received,
     'Accepted documents cannot exceed received documents.',
-  )
-  .passthrough();
+  );
 
 export const progressSchema = z
   .object({
@@ -307,6 +307,7 @@ export const validationResultSchema = z
     manualReviewRequired: z.boolean().default(false),
     checkedAt: dateTimeSchema.optional(),
   })
+  .passthrough()
   .superRefine(({ issues, valid }, context) => {
     if (valid && issues.some((issue) => issue.severity === 'blocking')) {
       context.addIssue({
@@ -315,8 +316,7 @@ export const validationResultSchema = z
         path: ['issues'],
       });
     }
-  })
-  .passthrough();
+  });
 
 export const providerRequestSchema = z
   .object({
@@ -431,6 +431,7 @@ export const auditEventSchema = z
     metadata: metadataSchema.optional(),
     timestamp: dateTimeSchema,
   })
+  .passthrough()
   .refine(
     ({ auditEventId, lifecycleEventId }) =>
       Boolean(auditEventId || lifecycleEventId),
@@ -438,8 +439,7 @@ export const auditEventSchema = z
       message: 'An audit or lifecycle event identifier is required.',
       path: ['auditEventId'],
     },
-  )
-  .passthrough();
+  );
 
 export const auditEventsSchema = z.array(auditEventSchema);
 export const lifecycleEventSchema = auditEventSchema;

@@ -17,11 +17,14 @@ import HomePage from './pages/HomePage.jsx';
 import NotFoundPage from './pages/NotFoundPage.jsx';
 import DiagnosticsPage from './pages/admin/DiagnosticsPage.jsx';
 import GAConfigurationPage from './pages/admin/GAConfigurationPage.jsx';
+import ReferenceDataPage from './pages/admin/ReferenceDataPage.jsx';
+import UsersAdminPage from './pages/admin/UsersAdminPage.jsx';
 import LoginPage from './pages/auth/LoginPage.jsx';
 import UnauthorizedPage from './pages/auth/UnauthorizedPage.jsx';
 import ApiSubmissionPage from './pages/onboarding/ApiSubmissionPage.jsx';
 import IntakePage from './pages/onboarding/IntakePage.jsx';
 import JourneyReviewPage from './pages/onboarding/JourneyReviewPage.jsx';
+import JourneysPage from './pages/onboarding/JourneysPage.jsx';
 import JourneySplashPage from './pages/onboarding/JourneySplashPage.jsx';
 import JourneyStepPage from './pages/onboarding/JourneyStepPage.jsx';
 import JourneyThankYouPage from './pages/onboarding/JourneyThankYouPage.jsx';
@@ -187,7 +190,7 @@ const protectedRoutes = [
     path: 'journeys',
     element: (
       <ProtectedPage permission={PERMISSIONS.VIEW_ONBOARDING}>
-        <HomePage />
+        <JourneysPage />
       </ProtectedPage>
     ),
     handle: routeHandle({
@@ -265,6 +268,20 @@ const protectedRoutes = [
       permission: PERMISSIONS.CREATE_ONBOARDING,
       roles: ALL_ROLES,
       title: 'General agency onboarding',
+    }),
+  },
+  {
+    path: 'journeys/financial-institution',
+    element: (
+      <ProtectedPage permission={PERMISSIONS.CREATE_ONBOARDING}>
+        <JourneySplashPage journeyType="financial_institution" />
+      </ProtectedPage>
+    ),
+    handle: routeHandle({
+      area: ROUTE_AREAS.JOURNEY,
+      permission: PERMISSIONS.CREATE_ONBOARDING,
+      roles: ALL_ROLES,
+      title: 'Financial institution onboarding',
     }),
   },
   {
@@ -697,7 +714,7 @@ const protectedRoutes = [
         permission={PERMISSIONS.MANAGE_REFERENCE_DATA}
         roles={ADMIN_ROLES}
       >
-        <GAConfigurationPage />
+        <ReferenceDataPage />
       </ProtectedPage>
     ),
     handle: routeHandle({
@@ -715,7 +732,7 @@ const protectedRoutes = [
         permission={PERMISSIONS.MANAGE_USERS}
         roles={ADMIN_ROLES}
       >
-        <HomePage />
+        <UsersAdminPage />
       </ProtectedPage>
     ),
     handle: routeHandle({
@@ -733,7 +750,7 @@ const protectedRoutes = [
         permission={PERMISSIONS.MANAGE_USERS}
         roles={ADMIN_ROLES}
       >
-        <HomePage />
+        <UsersAdminPage />
       </ProtectedPage>
     ),
     handle: routeHandle({

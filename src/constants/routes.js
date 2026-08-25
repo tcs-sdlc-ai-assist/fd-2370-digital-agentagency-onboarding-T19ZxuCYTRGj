@@ -16,6 +16,7 @@ export const ROUTES = Object.freeze({
   REGISTERED_REP_JOURNEY: '/journeys/registered-representative',
   CORPORATE_JOURNEY: '/journeys/corporate',
   GA_AGENCY_JOURNEY: '/journeys/ga-agency',
+  FINANCIAL_INSTITUTION_JOURNEY: '/journeys/financial-institution',
 
   PARTNER: '/partner',
   PARTNER_DASHBOARD: '/partner/dashboard',
@@ -33,6 +34,7 @@ export const ROUTES = Object.freeze({
   OPERATIONS_EXCEPTIONS: '/operations/exceptions',
   OPERATIONS_CONTRACT_CHANGES: '/operations/contract-changes',
   OPERATIONS_REPORTS: '/operations/reports',
+  OPERATIONS_AUDIT: '/operations/reports/audit',
   OPERATIONS_NOTIFICATIONS: '/operations/notifications',
 
   ADMIN: '/admin',

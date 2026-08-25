@@ -58,6 +58,10 @@ const OPERATIONS_NAVIGATION = Object.freeze([
     path: ROUTES.OPERATIONS_REPORTS,
   },
   {
+    label: 'Audit history',
+    path: ROUTES.OPERATIONS_AUDIT,
+  },
+  {
     label: 'Notifications',
     path: ROUTES.OPERATIONS_NOTIFICATIONS,
   },
@@ -129,26 +133,61 @@ function getDisplayName(user) {
   return displayName || user?.email || 'Current user';
 }
 
+function getActiveNavigationPath(pathname, items) {
+  return items.reduce((bestPath, item) => {
+    const isMatch =
+      pathname === item.path || pathname.startsWith(`${item.path}/`);
+
+    if (!isMatch) {
+      return bestPath;
+    }
+
+    if (!bestPath || item.path.length > bestPath.length) {
+      return item.path;
+    }
+
+    return bestPath;
+  }, null);
+}
+
 function NavigationLinks({ items, onNavigate }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const activePath = getActiveNavigationPath(location.pathname, items);
+
   return (
     <ul className="space-y-1">
-      {items.map((item) => (
-        <li key={item.path}>
-          <NavLink
-            className={({ isActive }) =>
-              `flex min-h-11 items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 ${
+      {items.map((item) => {
+        const isActive = item.path === activePath;
+
+        return (
+          <li key={item.path}>
+            <NavLink
+              className={`flex min-h-11 items-center rounded-lg px-3 py-2 text-sm font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 ${
                 isActive
                   ? 'bg-primary-50 text-lga-navy dark:bg-primary-950 dark:text-primary-100'
                   : 'text-text-muted hover:bg-surface-muted hover:text-lga-navy dark:text-slate-300 dark:hover:bg-slate-800 dark:hover:text-white'
-              }`
-            }
-            onClick={onNavigate}
-            to={item.path}
-          >
-            {item.label}
-          </NavLink>
-        </li>
-      ))}
+              }`}
+              onClick={(event) => {
+                onNavigate();
+
+                if (location.pathname !== item.path) {
+                  return;
+                }
+
+                event.preventDefault();
+                navigate(item.path, {
+                  replace: true,
+                  state: { refreshAt: Date.now() },
+                });
+              }}
+              to={item.path}
+            >
+              {item.label}
+            </NavLink>
+          </li>
+        );
+      })}
     </ul>
   );
 }
@@ -207,9 +246,6 @@ export function AppShell({ children }) {
   const homePath = getHomePath(role);
   const displayName = getDisplayName(currentUserValue);
   const roleLabel = ROLE_LABELS[role] ?? 'User';
-  const environmentLabel =
-    appConfig.appEnv.charAt(0).toUpperCase() +
-    appConfig.appEnv.slice(1);
 
   useEffect(() => {
     if (!userMenuOpen) {
@@ -262,15 +298,6 @@ export function AppShell({ children }) {
       >
         Skip to main content
       </a>
-
-      <div
-        aria-label="Simulation environment notice"
-        className="border-b border-accent-600 bg-accent-100 px-4 py-2 text-center text-sm font-medium text-accent-950 dark:border-accent-700 dark:bg-accent-950 dark:text-accent-100"
-        role="status"
-      >
-        Simulation environment ({environmentLabel}) — use synthetic data
-        only. No production transactions are performed.
-      </div>
 
       <header className="sticky top-0 z-30 border-b border-border bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
         <div className="flex h-16 items-center gap-3 px-4 sm:px-6">
@@ -341,7 +368,11 @@ export function AppShell({ children }) {
               <button
                 aria-expanded={userMenuOpen}
                 aria-haspopup="menu"
-                className="flex min-h-11 items-center gap-2 rounded-lg px-2 py-1 text-left transition-colors hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-lga-sky dark:hover:bg-slate-800"
+                className={`flex min-h-11 items-center gap-2 rounded-full px-2 py-1 text-left transition-colors focus:outline-none focus:ring-2 focus:ring-lga-sky ${
+                  userMenuOpen
+                    ? 'bg-primary-50 dark:bg-slate-800'
+                    : 'hover:bg-surface-muted dark:hover:bg-slate-800'
+                }`}
                 onClick={() =>
                   setUserMenuOpen((isOpen) => !isOpen)
                 }
@@ -349,7 +380,7 @@ export function AppShell({ children }) {
               >
                 <span
                   aria-hidden="true"
-                  className="flex size-9 shrink-0 items-center justify-center rounded-full bg-primary-100 text-sm font-bold text-lga-navy dark:bg-primary-900 dark:text-primary-100"
+                  className="flex size-9 shrink-0 items-center justify-center rounded-full bg-lga-navy text-sm font-bold text-white ring-2 ring-primary-100 dark:bg-primary-800 dark:ring-slate-700"
                 >
                   {getInitials(currentUserValue)}
                 </span>
@@ -363,7 +394,9 @@ export function AppShell({ children }) {
                 </span>
                 <svg
                   aria-hidden="true"
-                  className="size-4 text-text-muted"
+                  className={`size-4 text-text-muted transition-transform ${
+                    userMenuOpen ? 'rotate-180' : ''
+                  }`}
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2"
@@ -380,30 +413,94 @@ export function AppShell({ children }) {
               {userMenuOpen && (
                 <div
                   aria-label="User menu"
-                  className="absolute right-0 mt-2 w-72 rounded-xl border border-border bg-white p-2 shadow-elevated dark:border-slate-700 dark:bg-slate-900"
+                  className="absolute right-0 mt-3 w-80 overflow-hidden rounded-2xl border border-border bg-white shadow-elevated dark:border-slate-700 dark:bg-slate-900"
                   role="menu"
                 >
-                  <div className="border-b border-border px-3 py-3 dark:border-slate-700">
-                    <p className="truncate text-sm font-semibold text-text dark:text-white">
-                      {displayName}
-                    </p>
-                    <p className="truncate text-sm text-text-muted dark:text-slate-400">
-                      {currentUserValue?.email ?? roleLabel}
-                    </p>
-                    {currentUserValue?.organization && (
-                      <p className="mt-2 truncate text-xs text-text-muted dark:text-slate-400">
-                        {currentUserValue.organization}
-                      </p>
-                    )}
+                  <div className="relative bg-gradient-to-br from-lga-navy via-primary-800 to-lga-sky px-5 pb-5 pt-5">
+                    <div
+                      aria-hidden="true"
+                      className="absolute inset-x-0 top-0 h-1 bg-lga-gold"
+                    />
+                    <div className="flex items-start gap-3">
+                      <span
+                        aria-hidden="true"
+                        className="flex size-14 shrink-0 items-center justify-center rounded-2xl bg-white/15 text-lg font-bold text-white ring-2 ring-white/30"
+                      >
+                        {getInitials(currentUserValue)}
+                      </span>
+                      <div className="min-w-0 pt-0.5">
+                        <p className="truncate text-base font-semibold text-white">
+                          {displayName}
+                        </p>
+                        <p className="mt-0.5 truncate text-sm text-primary-100">
+                          {currentUserValue?.email ?? roleLabel}
+                        </p>
+                        <span className="mt-2 inline-flex rounded-full bg-white/15 px-2.5 py-1 text-xs font-semibold tracking-wide text-white">
+                          {roleLabel}
+                        </span>
+                      </div>
+                    </div>
                   </div>
-                  <button
-                    className="mt-2 flex min-h-11 w-full items-center rounded-lg px-3 py-2 text-left text-sm font-medium text-danger transition-colors hover:bg-danger-light focus:outline-none focus:ring-2 focus:ring-danger dark:hover:bg-danger-dark"
-                    onClick={handleLogout}
-                    role="menuitem"
-                    type="button"
-                  >
-                    Sign out
-                  </button>
+
+                  {currentUserValue?.organization && (
+                    <div className="flex items-center gap-3 border-b border-border px-5 py-3.5 dark:border-slate-700">
+                      <span
+                        aria-hidden="true"
+                        className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary-50 text-lga-sky dark:bg-slate-800 dark:text-primary-200"
+                      >
+                        <svg
+                          className="size-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M4 20V8.5L12 4l8 4.5V20M9 20v-6h6v6"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      <div className="min-w-0">
+                        <p className="text-xs font-medium uppercase tracking-wide text-text-muted dark:text-slate-400">
+                          Organization
+                        </p>
+                        <p className="truncate text-sm font-semibold text-lga-navy dark:text-white">
+                          {currentUserValue.organization}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="p-2">
+                    <button
+                      className="flex min-h-11 w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-semibold text-danger transition-colors hover:bg-danger-light focus:outline-none focus:ring-2 focus:ring-danger dark:hover:bg-danger-dark dark:hover:text-white"
+                      onClick={handleLogout}
+                      role="menuitem"
+                      type="button"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="flex size-8 items-center justify-center rounded-lg bg-danger-light text-danger dark:bg-danger-dark dark:text-white"
+                      >
+                        <svg
+                          className="size-4"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="1.8"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            d="M10 7V5a2 2 0 012-2h7v18h-7a2 2 0 01-2-2v-2M15 12H4m0 0l3-3m-3 3l3 3"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          />
+                        </svg>
+                      </span>
+                      Sign out
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

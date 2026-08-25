@@ -93,6 +93,9 @@ export const ROUTE_ACCESS_POLICIES = Object.freeze({
   [ROUTES.GA_AGENCY_JOURNEY]: Object.freeze({
     permission: PERMISSIONS.CREATE_ONBOARDING,
   }),
+  [ROUTES.FINANCIAL_INSTITUTION_JOURNEY]: Object.freeze({
+    permission: PERMISSIONS.CREATE_ONBOARDING,
+  }),
   [ROUTES.PARTNER]: Object.freeze({
     permission: PERMISSIONS.VIEW_DASHBOARD,
     roles: EXTERNAL_PORTAL_ROLES,
@@ -151,6 +154,10 @@ export const ROUTE_ACCESS_POLICIES = Object.freeze({
   }),
   [ROUTES.OPERATIONS_REPORTS]: Object.freeze({
     permission: PERMISSIONS.VIEW_REPORTS,
+    roles: INTERNAL_PORTAL_ROLES,
+  }),
+  [ROUTES.OPERATIONS_AUDIT]: Object.freeze({
+    permission: PERMISSIONS.VIEW_ONBOARDING,
     roles: INTERNAL_PORTAL_ROLES,
   }),
   [ROUTES.OPERATIONS_NOTIFICATIONS]: Object.freeze({

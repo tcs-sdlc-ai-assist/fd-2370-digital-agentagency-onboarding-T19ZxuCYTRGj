@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   canAccessRoute,
   canPerformAction,
@@ -22,8 +22,15 @@ const CAPABILITY_SECTIONS = Object.freeze([
       Object.freeze({
         title: 'Start a guided journey',
         description:
-          'Begin an individual, corporate, agency, or registered representative onboarding journey.',
+          'Begin an individual, corporate, agency, financial-institution, or registered representative onboarding journey.',
         path: ROUTES.JOURNEY_NEW,
+        permission: PERMISSIONS.CREATE_ONBOARDING,
+      }),
+      Object.freeze({
+        title: 'Financial institution journey',
+        description:
+          'Start a BK-14 financial-institution employee contracting journey.',
+        path: ROUTES.FINANCIAL_INSTITUTION_JOURNEY,
         permission: PERMISSIONS.CREATE_ONBOARDING,
       }),
       Object.freeze({
@@ -127,6 +134,13 @@ const CAPABILITY_SECTIONS = Object.freeze([
         permission: PERMISSIONS.VIEW_REPORTS,
       }),
       Object.freeze({
+        title: 'Audit history',
+        description:
+          'Review timestamped onboarding and maintenance actions with actor details.',
+        path: ROUTES.OPERATIONS_AUDIT,
+        permission: PERMISSIONS.VIEW_ONBOARDING,
+      }),
+      Object.freeze({
         title: 'Operations notifications',
         description:
           'Inspect role-visible notification logs and delivery previews.',
@@ -190,10 +204,25 @@ function getDisplayName(user) {
 }
 
 function CapabilityCard({ item }) {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isCurrentScreen = location.pathname === item.path;
+
   return (
     <li className="h-full">
       <Link
         className="group flex h-full min-h-44 flex-col rounded-xl border border-border bg-white p-5 shadow-card transition-all hover:-translate-y-0.5 hover:border-lga-sky hover:shadow-elevated focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 dark:border-slate-700 dark:bg-slate-900 dark:hover:border-primary-400 dark:focus:ring-offset-slate-950"
+        onClick={(event) => {
+          if (!isCurrentScreen) {
+            return;
+          }
+
+          event.preventDefault();
+          navigate(item.path, {
+            replace: true,
+            state: { refreshAt: Date.now() },
+          });
+        }}
         to={item.path}
       >
         <div className="flex items-start justify-between gap-4">
@@ -257,6 +286,7 @@ function CapabilitySection({ section }) {
  * Displays a role-aware overview of available demo capabilities.
  */
 export function HomePage() {
+  const location = useLocation();
   const authState = useAuthStore();
   const {
     currentUser,
@@ -331,7 +361,10 @@ export function HomePage() {
   }
 
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-8">
+    <div
+      className="mx-auto w-full max-w-7xl space-y-8"
+      key={location.state?.refreshAt ?? location.key}
+    >
       <section
         aria-labelledby="home-title"
         className="overflow-hidden rounded-2xl bg-lga-navy text-white shadow-elevated"

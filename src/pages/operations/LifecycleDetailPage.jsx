@@ -113,8 +113,7 @@ function getApplicantName(record) {
   return (
     applicant.legalName ??
     applicant.name ??
-    personName ||
-    'Not available'
+    (personName || 'Not available')
   );
 }
 
@@ -693,7 +692,7 @@ export function LifecycleDetailPage({
       workItemRepository,
     ],
   );
-  const suppliedRecord =
+  const resolvedRecord =
     suppliedRecord ?? suppliedApplication ?? data ?? null;
   const routeIdentifier = getRouteIdentifier(params);
   const [detail, setDetail] = useState(null);
@@ -706,7 +705,7 @@ export function LifecycleDetailPage({
 
     try {
       const record =
-        suppliedRecord ??
+        resolvedRecord ??
         (routeIdentifier
           ? applicationRepository.find(routeIdentifier)
           : null);
@@ -788,7 +787,7 @@ export function LifecycleDetailPage({
     suppliedDocumentPackage,
     suppliedLifecycle,
     suppliedProviderChecks,
-    suppliedRecord,
+    resolvedRecord,
     suppliedSyncAttempts,
     suppliedWorkItems,
     syncAttemptRepository,

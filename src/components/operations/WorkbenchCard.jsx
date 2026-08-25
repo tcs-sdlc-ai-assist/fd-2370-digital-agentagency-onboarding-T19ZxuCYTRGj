@@ -217,7 +217,7 @@ function TransitionButton({
 
   return (
     <button
-      className={`inline-flex min-h-10 items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-slate-900 ${
+      className={`inline-flex min-h-11 w-full items-center justify-center rounded-lg px-3 py-2 text-center text-sm font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:focus:ring-offset-slate-900 ${
         primary
           ? 'bg-lga-navy text-white hover:bg-primary-800 dark:bg-primary-600 dark:hover:bg-primary-500'
           : 'border border-border bg-white text-lga-navy hover:bg-surface-muted dark:border-slate-600 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800'
@@ -498,10 +498,10 @@ export function WorkbenchCard({
         {(showActions ||
           typeof onOpen === 'function' ||
           actions !== null) && (
-          <div className="flex flex-col gap-3 border-t border-border pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end dark:border-slate-700">
+          <div className="grid grid-cols-1 gap-2 border-t border-border pt-4 sm:grid-cols-[repeat(auto-fit,minmax(10.5rem,1fr))] dark:border-slate-700">
             {typeof onOpen === 'function' && (
               <button
-                className="inline-flex min-h-10 items-center justify-center rounded-lg border border-border bg-white px-4 py-2 text-sm font-semibold text-lga-navy transition-colors hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800 dark:focus:ring-offset-slate-900"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-border bg-white px-3 py-2 text-center text-sm font-semibold text-lga-navy transition-colors hover:bg-surface-muted focus:outline-none focus:ring-2 focus:ring-lga-sky focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:bg-slate-900 dark:text-white dark:hover:bg-slate-800 dark:focus:ring-offset-slate-900"
                 disabled={busy}
                 onClick={(event) => onOpen(validItem, event)}
                 type="button"

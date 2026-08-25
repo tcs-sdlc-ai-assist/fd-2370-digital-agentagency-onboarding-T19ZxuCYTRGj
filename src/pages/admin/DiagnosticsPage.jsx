@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { canPerformAction } from '../../auth/permissionPolicy.js';
 import DataTable from '../../components/shared/DataTable.jsx';

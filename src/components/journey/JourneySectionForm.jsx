@@ -250,6 +250,7 @@ const contractSchema = z
       })
       .passthrough(),
   })
+  .passthrough()
   .superRefine((value, context) => {
     if (
       value.contract.commissionSchedule === 'ABNCA' &&
@@ -273,8 +274,7 @@ const contractSchema = z
         path: ['contract', 'level'],
       });
     }
-  })
-  .passthrough();
+  });
 
 const principalSchema = z
   .object({
@@ -323,6 +323,7 @@ const disclosuresSchema = z
         bankruptcy: z.boolean().default(false),
         explanation: optionalTextSchema,
       })
+      .passthrough()
       .superRefine((value, context) => {
         if (
           (value.criminalHistory ||
@@ -337,8 +338,7 @@ const disclosuresSchema = z
             path: ['explanation'],
           });
         }
-      })
-      .passthrough(),
+      }),
   })
   .passthrough();
 
@@ -451,6 +451,7 @@ const commissionSchema = z
         ),
         advanceCommission: z.boolean().default(false),
       })
+      .passthrough()
       .superRefine((value, context) => {
         if (
           value.schedule === 'ABNCA' &&
@@ -462,8 +463,7 @@ const commissionSchema = z
             path: ['advanceCommission'],
           });
         }
-      })
-      .passthrough(),
+      }),
   })
   .passthrough();
 
@@ -511,6 +511,7 @@ const documentsSchema = z
         accepted: optionalNumberSchema,
         notes: optionalTextSchema,
       })
+      .passthrough()
       .superRefine((value, context) => {
         if (
           value.received !== undefined &&
@@ -537,8 +538,7 @@ const documentsSchema = z
             path: ['accepted'],
           });
         }
-      })
-      .passthrough(),
+      }),
   })
   .passthrough();
 

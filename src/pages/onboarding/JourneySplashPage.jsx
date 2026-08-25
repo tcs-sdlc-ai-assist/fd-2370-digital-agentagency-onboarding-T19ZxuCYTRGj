@@ -23,6 +23,7 @@ const PATH_JOURNEY_TYPES = Object.freeze({
   'registered-representative': JOURNEY_TYPES.REGISTERED_REP,
   corporate: JOURNEY_TYPES.CORPORATE,
   'ga-agency': JOURNEY_TYPES.GA_AGENCY,
+  'financial-institution': JOURNEY_TYPES.FINANCIAL_INSTITUTION,
 });
 
 const DEFAULT_HELP_ITEMS = Object.freeze([
